@@ -1,0 +1,10 @@
+[DEFAULT]
+main-repo = core-kit
+
+[core-kit]
+priority = 1
+location = /var/db/repos/prototype99
+layman-type = git
+sync-type = laymansync
+sync-uri = https://github.com/prototype99/prototype99.git
+auto-sync = yes
