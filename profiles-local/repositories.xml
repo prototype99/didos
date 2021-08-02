@@ -138,18 +138,6 @@
 		<feed>https://github.com/maurerpe/arduino-overlay/commits/master.atom</feed>
 	</repo>
 	<repo quality="experimental" status="unofficial">
-		<name>arm_support</name>
-		<description lang="en">Gentoo ARM project overlay</description>
-		<homepage>https://github.com/gentoo/arm</homepage>
-		<owner type="project">
-			<email>arm@gentoo.org</email>
-			<name>ARM Project</name>
-		</owner>
-		<source type="git">https://github.com/gentoo/arm.git</source>
-		<source type="git">git+ssh://git@github.com/gentoo/arm.git</source>
-		<feed>https://github.com/gentoo/arm/commits/master.atom</feed>
-	</repo>
-	<repo quality="experimental" status="unofficial">
 		<name>artsoftware</name>
 		<description>Art-Software local repo</description>
 		<homepage>https://github.com/prototype99/artsoftware</homepage>
