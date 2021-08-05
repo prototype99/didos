@@ -1919,11 +1919,11 @@
 	<repo quality="experimental" status="official">
 		<name>programmador</name>
 		<description lang="en">programmador overlay</description>
-		<homepage>https://bitbucket.org/programmador/gentoo-overlay/</homepage>
+		<homepage>https://github.com/prototype99/programmador</homepage>
 		<owner type="person">
-			<name>Alexander Konotop</name>
+			<name>seirra blake</name>
 		</owner>
-		<source type="git">https://bitbucket.org/programmador/gentoo-overlay/</source>
+		<source type="git">https://github.com/prototype99/programmador.git</source>
 	</repo>
 	<repo quality="experimental" status="official">
 		<name>prometheanfire</name>
