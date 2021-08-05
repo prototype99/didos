@@ -1324,14 +1324,14 @@
 	<repo quality="experimental" status="unofficial">
 		<name>leonardohn</name>
 		<description lang="en">leonardohn personal overlay</description>
-		<homepage>https://github.com/leonardohn/gentoo-overlay</homepage>
+		<homepage>https://github.com/prototype99/leonardohn</homepage>
 		<owner type="person">
-			<email>leonardohn@null.net</email>
-			<name>Leonardo Neumann</name>
+			<email>sophietheopossum@yandex.ru</email>
+			<name>seirra blake</name>
 		</owner>
-		<source type="git">https://github.com/leonardohn/gentoo-overlay.git</source>
-		<source type="git">git+ssh://git@github.com/leonardohn/gentoo-overlay.git</source>
-		<feed>https://github.com/leonardohn/gentoo-overlay/commits/master.atom</feed>
+		<source type="git">https://github.com/prototype99/leonardohn.git</source>
+		<source type="git">git+ssh://git@github.com/prototype99/leonardohn.git</source>
+		<feed>https://github.com/prototype99/leonardohn/commits/master.atom</feed>
 	</repo>
 	<repo quality="experimental" status="unofficial">
 		<name>levenkov</name>
