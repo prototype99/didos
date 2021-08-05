@@ -2420,13 +2420,13 @@
 	<repo priority="50" quality="experimental" status="unofficial">
 		<name>vulkan</name>
 		<description lang="en">Gentoo overlay for Vulkan</description>
-		<homepage>https://github.com/Lucretia/vulkan-overlay</homepage>
+		<homepage>https://github.com/prototype99/vulkan</homepage>
 		<owner type="person">
 			<name>lucretia</name>
 		</owner>
-		<source type="git">https://github.com/Lucretia/vulkan-overlay.git</source>
-		<source type="git">git+ssh://git@github.com/Lucretia/vulkan-overlay.git</source>
-		<feed>https://github.com/Lucretia/vulkan-overlay/commits/master.atom</feed>
+		<source type="git">https://github.com/prototype99/vulkan.git</source>
+		<source type="git">git+ssh://git@github.com/prototype99/vulkan.git</source>
+		<feed>https://github.com/prototype99/vulkan/commits/master.atom</feed>
 	</repo>
 	<repo quality="experimental" status="unofficial">
 		<name>wuodan</name>
