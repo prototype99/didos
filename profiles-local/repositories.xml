@@ -2237,15 +2237,12 @@
 	<repo quality="testing" status="official">
 		<name>steev</name>
 		<description>Steev Klimaszewski's Overlay</description>
-		<homepage>https://cgit.gentoo.org/dev/steev.git/</homepage>
+		<homepage>https://github.com/prototype99/steev</homepage>
 		<owner type="person">
-			<email>steev@gentoo.org</email>
-			<name>Stephen Klimaszewski</name>
+			<email>sophietheopossum@yandex.ru</email>
+			<name>seirra blake</name>
 		</owner>
-		<source type="git">https://anongit.gentoo.org/git/dev/steev.git</source>
-		<source type="git">git://anongit.gentoo.org/dev/steev.git</source>
-		<source type="git">git+ssh://git@git.gentoo.org/dev/steev.git</source>
-		<feed>https://cgit.gentoo.org/dev/steev.git/atom/</feed>
+		<source type="git">https://github.com/prototype99/steev.git</source>
 	</repo>
 	<repo quality="experimental" status="unofficial">
 		<name>sublime-text</name>
