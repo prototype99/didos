@@ -5,7 +5,7 @@ EAPI=6
 inherit rindeal
 
 ## python-any-r1.eclass:
-PYTHON_COMPAT=( python3_{5,6,7} )
+PYTHON_COMPAT=( py{py3,thon3_{5..7}} )
 
 ## git-hosting.eclass:
 GH_RN="github:KhronosGroup:SPIRV-Tools"

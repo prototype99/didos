@@ -1,6 +1,0 @@
-*paludis-9999
-::paludis-overlay
--base ebuild
-::prototype99
--eapi7 enabled by default
--add sydbox dependency
