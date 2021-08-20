@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    #some ego commits have historically been rapid
+    - cron: '0/5 * * * *'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run pkgcheck
+        uses: pkgcore/pkgcheck-action@v1
