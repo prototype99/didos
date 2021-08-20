@@ -9,7 +9,7 @@ GH_RN="github:google"
 GH_REF="b982e3d44fbfbc3505fc00010fcff7613ec3b0b8"  # need to check setup.py manually for new versions
 
 ## python-r1.eclass:
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+PYTHON_COMPAT=( py{py3,thon{2_7,3_{5..7}}} )
 
 ## EXPORT_FUNCTIONS: src_unpack
 ## variables: HOMEPAGE, SRC_URI

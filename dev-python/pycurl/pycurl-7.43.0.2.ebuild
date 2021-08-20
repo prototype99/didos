@@ -11,7 +11,7 @@ GH_REF="REL_${PV//./_}"
 
 ## python-*.eclass:
 # The selftests fail with pypy, and urlgrabber segfaults for me.
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+PYTHON_COMPAT=( py{py3,thon{2_7,3_{5..7}}} )
 
 ## EXPORT_FUNCTIONS: src_unpack
 ## variables: GH_HOMEPAGE

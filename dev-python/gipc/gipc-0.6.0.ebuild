@@ -8,7 +8,7 @@ inherit rindeal
 GH_RN="bitbucket:jgehrcke"
 
 ## python-*.eclass:
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+PYTHON_COMPAT=( py{py3,thon{2_7,3_{5..7}}} )
 
 inherit git-hosting
 inherit distutils-r1

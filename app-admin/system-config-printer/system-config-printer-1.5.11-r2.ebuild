@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{5..7} )
+PYTHON_COMPAT=( py{py3,thon3_{5..7}} )
 PYTHON_REQ_USE="xml"
 inherit gnome2 python-single-r1 systemd
 

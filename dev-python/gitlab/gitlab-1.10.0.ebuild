@@ -5,7 +5,7 @@ EAPI=7
 inherit rindeal
 
 ## python-*.eclass:
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+PYTHON_COMPAT=( py{py3,thon{2_7,3_{5..7}}} )
 
 ## git-hosting.eclass:
 GH_RN='github:python-gitlab:python-gitlab'

@@ -8,7 +8,7 @@ inherit rindeal
 GH_RN="github:cloudflare:python-cloudflare"
 
 ## python-*.eclass:
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+PYTHON_COMPAT=( py{py3,thon{2_7,3_{5..7}}} )
 
 ## EXPORT_FUNCTIONS: src_unpack
 inherit git-hosting

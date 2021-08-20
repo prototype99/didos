@@ -5,7 +5,7 @@
 EAPI=6
 inherit rindeal
 
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+PYTHON_COMPAT=( py{py3,thon{2_7,3_{5..7}}} )
 # DISTUTILS_IN_SOURCE_BUILD=1
 
 # EXPORT_FUNCTIONS: src_prepare src_configure src_compile src_test src_install
