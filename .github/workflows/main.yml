@@ -7,7 +7,7 @@ on:
     branches: [ master ]
   schedule:
     #some ego commits have historically been rapid
-    - cron: '0/15 * * * *'
+    - cron: '0/17 * * * *'
 
   workflow_dispatch:
 
