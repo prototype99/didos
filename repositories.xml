@@ -1,15 +1,15 @@
 <?xml version="1.0" ?>
 <repositories version="1.0">
 	<repo priority="50" quality="experimental" status="unofficial">
-		<name>prototype99</name>
+		<name>didos</name>
 		<description lang="en">An unofficial Gentoo Overlay that enables installation of Canonical's "Snappy" backbone. other packages maybe included in the future</description>
-		<homepage>https://github.com/prototype99/prototype99</homepage>
+		<homepage>https://github.com/prototype99/didos</homepage>
 		<owner type="person">
-			<email>sophietheopossum@yandex.com</email>
+			<email>sophietheopossum@yandex.ru</email>
 			<name>Seirra Blake</name>
 		</owner>
-		<source type="git">https://github.com/prototype99/prototype99.git</source>
-		<source type="git">git+ssh://git@github.com/prototype99/prototype99.git</source>
-		<feed>https://github.com/prototype99/prototype99/commits/master.atom</feed>
+		<source type="git">https://github.com/prototype99/didos.git</source>
+		<source type="git">git+ssh://git@github.com/prototype99/didos.git</source>
+		<feed>https://github.com/prototype99/didos/commits/master.atom</feed>
 	</repo>
 </repositories>
