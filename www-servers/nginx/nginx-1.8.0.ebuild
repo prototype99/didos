@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/www-servers/nginx/nginx-1.8.0.ebuild,v 1.1 2015/06/25 09:27:53 mrueg Exp $
 
-EAPI="5"
+EAPI="6"
 
 # Maintainer notes:
 # - http_rewrite-independent pcre-support makes sense for matching locations without an actual rewrite

@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/www-servers/nginx/nginx-1.7.10.ebuild,v 1.2 2015/03/10 12:45:41 jlec Exp $
 
-EAPI="5"
+EAPI="6"
 
 # Maintainer notes:
 # - http_rewrite-independent pcre-support makes sense for matching locations without an actual rewrite
