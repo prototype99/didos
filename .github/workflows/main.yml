@@ -1,23 +1,28 @@
 name: CI
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
   schedule:
-    #some ego commits have historically been rapid
     - cron: '0/23 * * * *'
 
   workflow_dispatch:
 
 jobs:
-  build:
+  manifest:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+          fetch-depth: 0
 
-      - name: Run pkgcheck
-        uses: pkgcore/pkgcheck-action@v1
+    # Run the repoman action
+    - uses: prototype99/action-repoman@master
+
+    - name: Run a multi-line script
+      run: |
+        git config user.name Seirra Blake
+        git config user.email sophietheopossum@yandex.ru
+        git pull
+        git add -A && git commit -m "update manifest"
+        git push origin
