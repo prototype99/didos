@@ -1,1 +1,1 @@
-/var/db/repos/prototype99/x11-terms/kitty/kitty-0.17.4.ebuild
+kitty-0.17.4.ebuild

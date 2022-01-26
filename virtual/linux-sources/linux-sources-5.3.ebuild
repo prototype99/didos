@@ -1,1 +1,1 @@
-/var/db/repos/prototype99/virtual/linux-sources/linux-sources-0.ebuild
+linux-sources-0.ebuild

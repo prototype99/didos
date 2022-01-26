@@ -1,1 +1,1 @@
-/var/db/repos/prototype99/x11-libs/kimageannotator/kimageannotator-0.3.1.ebuild
+kimageannotator-0.3.1.ebuild

@@ -1,1 +1,1 @@
-/var/db/repos/prototype99/dev-libs/glib/glib-2.65.0-r1.ebuild
+glib-2.65.0-r1.ebuild
