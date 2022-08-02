@@ -1,3 +1,5 @@
+*linux-headers-5.10-r1
+::prototype99	bump eapi
 *linux-headers-5.10
 ::gentoo		base ebuild
 ::prototype99	makefile needs rsync

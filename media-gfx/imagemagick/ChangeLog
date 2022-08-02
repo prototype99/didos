@@ -1,33 +1,26 @@
 *7.0.10.9
-
-17.5.2020	::gentoo		update keywording, update default use flags, update dependencies, add new workarounds
-
+::gentoo		update keywording, update default use flags, update dependencies, add new workarounds
 *7.0.9.14
-
-12.1.2020	::gentoo		bump, update year
-
+::gentoo		bump, update year
 *7.0.9.8
-
-12.1.2020	::gentoo		bump
-12.1.2020	::prototype99	make better use of ${PN}
-
+::gentoo		bump
+::prototype99	make better use of ${PN}
 *7.0.9.5
-
-7.12.2019	::gentoo		update and bring in new gentoo improvements
-	-bump to eapi 7
-	-move back to mirror for source
-	-make slot less specific
-	-add RESTRICT
-	-move pkgconfig to bdepend
-	-put required use somewhere more logical
-	-don't build with jxl
-	-minor directory changes
-
+::gentoo		update and bring in new gentoo improvements
+-bump to eapi 7
+-move back to mirror for source
+-make slot less specific
+-add RESTRICT
+-move pkgconfig to bdepend
+-put required use somewhere more logical
+-don't build with jxl
+-minor directory changes
+*7.0.8.68-r1
+::prototype99	bump eapi
 *7.0.8.68
-
-25.11.2019	::prototype99	quote variable
-??????????	::prototype99
-	-working source url
-	-remove 9999 code
-	-remove unused $MY_P
-??????????	::stowe-verlay	base ebuild
+::prototype99
+-quote variable
+-working source url
+-remove 9999 code
+-remove unused $MY_P
+::stowe-verlay	base ebuild

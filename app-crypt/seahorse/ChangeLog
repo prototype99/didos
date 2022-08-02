@@ -1,7 +1,5 @@
-3.32.2
-::dantrell-gnome-3-32
--base ebuild
-::prototype99
--missing build time dependency
--remove unnecessary speech marks
--improved keywording
+*3.32.2-r1
+::prototype99			bump eapi
+*3.32.2
+::dantrell-gnome-3-32	base ebuild
+::prototype99			missing build time dependency, remove unnecessary speech marks, improved keywording

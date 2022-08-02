@@ -2,6 +2,8 @@
 ::gentoo				eapi7, update copyright, slightly alter structure, update dependencies, updated patch
 ::pg_overlay			update dependencies
 ::prototype99			make better use of PN, add missing dependency
+*gsettings-desktop-schemas-3.34.0-r1
+::prototype99			bump eapi
 *gsettings-desktop-schemas-3.34.0
 ::dantrell-gnome-3-32	base ebuild
 ::my-gnome				remove unnecessary quotes, better keywording

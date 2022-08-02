@@ -1,8 +1,6 @@
 *gentoo-sources-5.2.5
-
-	25.11.2019	::prototype99	fix unquoted variable, fix copyright
-	??????????	::prototype99	long argument patch
-
+::prototype99	fix unquoted variable, fix copyright, long argument patch
+*gentoo-sources-4.16.0-r1
+::prototype99	bump eapi
 *gentoo-sources-4.16.0
-
-	??????????	::gentoo		first
+::gentoo		first
