@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-inherit eapi7-ver eutils flag-o-matic libtool perl-functions toolchain-funcs multilib
+inherit eutils flag-o-matic libtool perl-functions toolchain-funcs multilib
 
 	MY_PV="$(ver_rs 3 '-')"
 	MY_P="ImageMagick-${MY_PV}"
