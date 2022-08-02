@@ -1,5 +1,5 @@
 *freshplayerplugin-0.3.9-r4
-::prototype99	update eclass usage
+::prototype99	update eclass usage, bump eapi
 *freshplayerplugin-0.3.9-r2
 ::prototype99	fix jack dependency
 *freshplayerplugin-0.3.9-r1
