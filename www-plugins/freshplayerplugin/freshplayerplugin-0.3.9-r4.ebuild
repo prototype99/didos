@@ -73,5 +73,5 @@ src_configure() {
 	else
 		mycmakeargs+=( -DWITH_HWDEC=0 )
 	fi
-	cmake-utils_src_configure
+	cmake_src_configure
 }
