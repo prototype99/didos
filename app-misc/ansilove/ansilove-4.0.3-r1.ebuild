@@ -11,7 +11,7 @@ GH_RN="github"
 inherit git-hosting
 
 ## EXPORT_FUNCTIONS src_prepare src_configure src_compile src_test src_install
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="ANSi/ASCII art to PNG converter in C"
 HOMEPAGE_A=(

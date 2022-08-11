@@ -11,7 +11,7 @@ GH_REF="v${PV}"
 ## EXPORT_FUNCTIONS: src_unpack
 inherit git-hosting
 ## EXPORT_FUNCTIONS: src_prepare src_configure src_compile src_test src_install
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="Cross-platform C and C++ unit testing framework for the 21th century"
 LICENSE="MIT"
@@ -48,7 +48,7 @@ src_prepare() {
 	rsed -r -e 's!struct bxf_spawn_params!struct bxf_spawn_params_s!' -i -- src/core/runner_coroutine.c
 	rsed -r -e "/\bDESTINATION\b/ s,\blib\b,$(get_libdir)," -i -- .cmake/Modules/PackageUtils.cmake
 
-	cmake-utils_src_prepare
+	cmake_src_prepare
 }
 
 src_configure() {
@@ -59,5 +59,5 @@ src_configure() {
 		-D I18N=$(usex nls)
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }

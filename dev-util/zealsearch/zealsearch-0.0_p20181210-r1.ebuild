@@ -10,7 +10,7 @@ GH_REF="66d88f5" # Dec 10, 2018
 
 inherit git-hosting
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="Zeal integration plugin for KTextEditor (KDevelop, Kate, KWrite, ...)"
 LICENSE="GPL-2"
@@ -44,5 +44,5 @@ src_configure() {
 		-D USE_KDE4=OFF
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }

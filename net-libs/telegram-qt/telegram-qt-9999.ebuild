@@ -11,7 +11,7 @@ GH_RN="github:Kaffeine"
 inherit git-hosting
 
 ## EXPORT_FUNCTIONS: src_prepare src_configure src_compile src_test src_install
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="Telegram binding for Qt"
 LICENSE="LGPL-2.1+"
@@ -52,5 +52,5 @@ src_configure() {
 		-D DEVELOPER_BUILD=$(usex debug)
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }

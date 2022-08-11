@@ -15,7 +15,7 @@ inherit linux-info
 # EXPORT_FUNCTIONS: src_unpack
 inherit git-hosting
 # EXPORT_FUNCTIONS: src_prepare src_configure src_compile src_test src_install
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="utility that shows an estimated instantaneous bandwidth on USB buses and devices"
 LICENSE="BSD"
@@ -45,5 +45,5 @@ src_prepare() {
 
 	sed -e '/add_definitions/ s|-O3||' -i -- src/CMakeLists.txt || die
 
-	cmake-utils_src_prepare
+	cmake_src_prepare
 }

@@ -13,7 +13,7 @@ GH_REF="openal-soft-${PV}"
 ## variables: GH_HOMEPAGE
 inherit git-hosting
 ## EXPORT_FUNCTIONS: src_prepare src_configure src_compile src_test src_install
-inherit cmake-utils
+inherit cmake
 ## EXPORT_FUNCTIONS: src_prepare pkg_preinst pkg_postinst pkg_postrm
 inherit xdg
 ## functions: make_desktop_entry
@@ -74,7 +74,7 @@ src_prepare() {
 	eapply_user
 
 	xdg_src_prepare
-	cmake-utils_src_prepare
+	cmake_src_prepare
 }
 
 src_configure() {
@@ -123,13 +123,13 @@ src_configure() {
 			-D "ALSOFT_EMBED_HRTF_DATA=OFF"
 		)
 
-		cmake-utils_src_configure
+		cmake_src_configure
 }
 
 src_install() {
 	DOCS=( alsoftrc.sample docs/env-vars.txt docs/hrtf.txt ChangeLog README )
 
-	cmake-utils_src_install
+	cmake_src_install
 
 	local b h2m_bins=()
 	use tests && h2m_bins+=( altonegen )

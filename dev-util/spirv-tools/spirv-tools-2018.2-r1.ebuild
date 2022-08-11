@@ -14,7 +14,7 @@ GH_REF="v${PV}"
 ## EXPORT_FUNCTIONS: src_unpack
 inherit git-hosting
 ## EXPORT_FUNCTIONS: src_prepare src_configure src_compile src_test src_install
-inherit cmake-utils
+inherit cmake
 ## EXPORT_FUNCTIONS: pkg_setup
 inherit python-any-r1
 
@@ -47,5 +47,5 @@ src_configure() {
 		-D SPIRV-Headers_SOURCE_DIR="/usr"
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }

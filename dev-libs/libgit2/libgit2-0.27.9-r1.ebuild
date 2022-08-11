@@ -20,7 +20,7 @@ inherit rindeal-utils
 inherit git-hosting
 
 ## EXPORT_FUNCTIONS: src_prepare src_configure src_compile src_test src_install
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="Linkable library implementation of Git"
 HOMEPAGE="${GH_HOMEPAGE} https://libgit2.github.com/"
@@ -85,7 +85,7 @@ src_configure() {
 		-D USE_BUNDLED_ZLIB=OFF
 		-D ENABLE_REPRODUCIBLE_BUILDS=OFF
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 src_test() {
@@ -103,7 +103,7 @@ src_test() {
 src_install() {
 	DOCS=( AUTHORS CONTRIBUTING.md CONVENTIONS.md README.md )
 
-	cmake-utils_src_install
+	cmake_src_install
 
 	if use examples
 	then

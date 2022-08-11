@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit git-r3 cmake-utils
+inherit git-r3 cmake
 
 # NOTE: please keep commit hash actually when version up
 EGIT_COMMIT="dcdfdec564fc2ab1e087cdc56d017162a05cf778"
@@ -37,7 +37,7 @@ src_prepare() {
 	eapply "${FILESDIR}"/system-flatbuffers.patch
 	eapply "${FILESDIR}"/system-flatc.patch
 	sed -i '/include(GetGitCommitHash)/d' CMakeLists.txt || die 'remove GetGitCommitHash by sed failed'
-	cmake-utils_src_prepare
+	cmake_src_prepare
 }
 
 CMAKE_BUILD_TYPE="Release"
@@ -47,5 +47,5 @@ src_configure() {
 		-DGIT_COMMIT_HASH="${EGIT_COMMIT}"
 		-DENABLE_TESTS=OFF
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }

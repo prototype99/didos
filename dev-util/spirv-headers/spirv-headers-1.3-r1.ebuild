@@ -11,7 +11,7 @@ GH_REF="02ffc719aa9f9c1dce5ce05743fb1afe6cbf17ea"
 ## EXPORT_FUNCTIONS: src_unpack
 inherit git-hosting
 ## EXPORT_FUNCTIONS: src_prepare src_configure src_compile src_test src_install
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="SPIR-V Registry header files"
 LICENSE="MIT"
@@ -35,7 +35,7 @@ src_configure() {
 		-D CMAKE_INSTALL_PREFIX="${ED}/usr"
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 src_compile() { : ; }
