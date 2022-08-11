@@ -1,4 +1,0 @@
-*brotli-1.0.7
-::gentoo		base ebuild
-::prototype99	impprove python flags, remove 9999 code
-::rindeal		add python2_7, add pypy, remove unnecessary space
