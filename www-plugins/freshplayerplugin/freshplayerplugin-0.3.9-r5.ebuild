@@ -24,6 +24,7 @@ COMMON_DEPEND="
 	dev-libs/libevent:=[threads]
 	media-libs/alsa-lib:=
 	media-libs/freetype:2=
+	media-libs/libva:=[X]
 	media-libs/mesa:=[egl(+)]
 	gles2-only? ( media-libs/mesa[gles2] )
 	x11-libs/cairo:=[X]
@@ -31,7 +32,6 @@ COMMON_DEPEND="
 	x11-libs/libXrandr:=
 	x11-libs/libXrender:=
 	x11-libs/libdrm:=
-	x11-libs/libva:=[X]
 	x11-libs/pango:=[X]
 	jack? (
 		virtual/jack
