@@ -1,7 +1,7 @@
 # Copyright 2008-2019 Arfrever Frehtes Taifersar Arahesis and others
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="7"
 
 inherit eutils scons-utils toolchain-funcs flag-o-matic
 
