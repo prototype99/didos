@@ -1,0 +1,37 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Tue, 11 Sep 2018 16:02:10 +0100
+Subject: tests: Expect some floating-point tests to fail on i386
+
+Upstream assumes everything uses SSE mathematics, but SSE isn't in
+Debian's baseline for i386, so we are stuck with i387 and its weird
+80-bit floating point registers. We can't even work around this with
+-fexcess-precision=standard, because mozjs is C++.
+
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=907363
+Forwarded: not-needed, Debian-specific
+---
+ js/src/tests/jstests.list | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+Index: mozjs-60.8.0/js/src/tests/jstests.list
+===================================================================
+--- mozjs-60.8.0.orig/js/src/tests/jstests.list
++++ mozjs-60.8.0/js/src/tests/jstests.list
+@@ -447,6 +447,17 @@ skip script test262/language/expressions
+ # https://bugzilla.mozilla.org/show_bug.cgi?id=1321616
+ skip script test262/annexB/built-ins/Function/createdynfn-html-close-comment-params.js
+ 
++############################
++# Tests disabled by Debian #
++############################
++
++# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=907363
++# We build without SSE because it isn't in our i386 baseline, which means
++# floating-point arithmetic is in i387 extended precision and the rounding
++# is not what these tests expect
++fails-if(xulRuntime.debian.DEB_HOST_ARCH_CPU.match(/^i386$/)) script non262/Date/timeclip.js
++fails-if(xulRuntime.debian.DEB_HOST_ARCH_CPU.match(/^i386$/)) script test262/language/types/number/S8.5_A2.1.js
++fails-if(xulRuntime.debian.DEB_HOST_ARCH_CPU.match(/^i386$/)) script test262/language/types/number/S8.5_A2.2.js
+ 
+ ###########################################################
+ # Tests disabled due to issues in test262 importer script #

@@ -1,0 +1,24 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Wed, 12 Sep 2018 09:46:34 +0100
+Subject: Skip some i18n tests because we are now using system ICU
+
+Forwarded: not-needed, Debian-specific
+---
+ js/src/tests/jstests.list | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+Index: mozjs-60.8.0/js/src/tests/jstests.list
+===================================================================
+--- mozjs-60.8.0.orig/js/src/tests/jstests.list
++++ mozjs-60.8.0/js/src/tests/jstests.list
+@@ -463,6 +463,10 @@ fails-if(xulRuntime.debian.DEB_HOST_ARCH
+ # NaN corner cases are different on ARM softfloat
+ fails-if(xulRuntime.debian.DEB_HOST_ARCH.match(/^armel$/)) script test262/built-ins/TypedArray/prototype/fill/fill-values-conversion-operations-consistent-nan.js
+ 
++# Fails with system ICU due to different data?
++skip script non262/Intl/DateTimeFormat/tz-environment-variable.js
++skip script non262/Intl/NumberFormat/formatToParts.js
++
+ ###########################################################
+ # Tests disabled due to issues in test262 importer script #
+ ###########################################################

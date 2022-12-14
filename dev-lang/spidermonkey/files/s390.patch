@@ -1,0 +1,14 @@
+Index: mozjs-60.8.0/js/src/tests/jstests.list
+===================================================================
+--- mozjs-60.8.0.orig/js/src/tests/jstests.list
++++ mozjs-60.8.0/js/src/tests/jstests.list
+@@ -470,6 +470,9 @@ skip script non262/Intl/NumberFormat/for
+ # Assumes little-endian IEEE representation of floating point numbers
+ fails-if(xulRuntime.debian.DEB_HOST_ARCH_ENDIAN=="big") script test262/built-ins/TypedArray/prototype/set/typedarray-arg-set-values-same-buffer-other-type.js
+ 
++# Crashes
++skip-if(xulRuntime.debian.DEB_HOST_ARCH.match(/^s390x$/)) script non262/extensions/clone-errors.js
++
+ ###########################################################
+ # Tests disabled due to issues in test262 importer script #
+ ###########################################################

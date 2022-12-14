@@ -1,0 +1,29 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Tue, 11 Sep 2018 16:03:17 +0100
+Subject: tests: Expect a test to fail on armel
+
+ARM softfloat has unusual behaviour in corner cases, like this test
+that exercises NaN (not-a-number). Upstream only supports the equivalent
+of our armhf.
+
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=908481
+Forwarded: not-needed, Debian-specific
+---
+ js/src/tests/jstests.list | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+Index: mozjs-60.8.0/js/src/tests/jstests.list
+===================================================================
+--- mozjs-60.8.0.orig/js/src/tests/jstests.list
++++ mozjs-60.8.0/js/src/tests/jstests.list
+@@ -459,6 +459,10 @@ fails-if(xulRuntime.debian.DEB_HOST_ARCH
+ fails-if(xulRuntime.debian.DEB_HOST_ARCH_CPU.match(/^i386$/)) script test262/language/types/number/S8.5_A2.1.js
+ fails-if(xulRuntime.debian.DEB_HOST_ARCH_CPU.match(/^i386$/)) script test262/language/types/number/S8.5_A2.2.js
+ 
++# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=908481
++# NaN corner cases are different on ARM softfloat
++fails-if(xulRuntime.debian.DEB_HOST_ARCH.match(/^armel$/)) script test262/built-ins/TypedArray/prototype/fill/fill-values-conversion-operations-consistent-nan.js
++
+ ###########################################################
+ # Tests disabled due to issues in test262 importer script #
+ ###########################################################
