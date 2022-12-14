@@ -1,4 +1,0 @@
-*spidermonkey-60.5.2_p0-r4
-::gentoo-clang	base ebuild
-::pg_overlay	add debian patches
-::prototype99	do not automatically apply patches unless conditions are met
