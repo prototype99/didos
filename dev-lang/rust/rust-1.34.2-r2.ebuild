@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} pypy )
+PYTHON_COMPAT=( python2_7 python3_{5..8} pypy )
 
 inherit check-reqs eapi7-ver estack flag-o-matic llvm multiprocessing multilib-build python-any-r1 rust-toolchain toolchain-funcs
 
