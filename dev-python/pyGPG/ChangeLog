@@ -1,3 +1,4 @@
+*pyGPG-0.2-r2
+::prototype99	remove unnecessary quotes, switch to eapi 7
 *pyGPG-0.2-r1
-::prototype99
--improve python use flags
+::prototype99	improve python use flags

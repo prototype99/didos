@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI=7
 
 PYTHON_COMPAT=(py{py3,thon{2_7,3_{5..7}}})
 
