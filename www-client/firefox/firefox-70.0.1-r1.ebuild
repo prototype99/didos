@@ -30,9 +30,9 @@ MOZ_SRC_URI="${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz"
 
 LLVM_MAX_SLOT=9
 
-inherit check-reqs eapi7-ver flag-o-matic toolchain-funcs eutils \
+inherit check-reqs flag-o-matic toolchain-funcs eutils \
 		gnome2-utils llvm mozcoreconf-v6 pax-utils xdg-utils \
-		autotools mozlinguas-v2 virtualx multiprocessing eapi7-ver
+		autotools mozlinguas-v2 virtualx multiprocessing
 
 DESCRIPTION="Firefox Web Browser"
 HOMEPAGE="https://www.mozilla.com/firefox
