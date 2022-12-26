@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 VIRTUALX_REQUIRED="pgo"
 WANT_AUTOCONF="2.1"
 
@@ -18,12 +18,12 @@ th tr uk ur uz vi xh zh-CN zh-TW )
 MOZ_PV="${PV}"
 
 # Patch version
-PATCH="${PN}-70.0-patches-03"
+PATCH="${PN}-72.0-patches-02"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 # Mercurial repository for Mozilla Firefox patches to provide better KDE Integration (developed by Wolfgang Rosenauer for OpenSUSE)
-HG_MOZ_REVISION="8a4f5aea2475"
+HG_MOZ_REVISION="4c5d44d40a03"
 HG_MOZ_PV="${MOZ_PV/%.*/.0}"
 HG_MOZILLA_URI="https://www.rosenauer.org/hg/mozilla"
 MOZ_SRC_URI="${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz"
@@ -32,7 +32,7 @@ LLVM_MAX_SLOT=9
 
 inherit check-reqs eapi7-ver flag-o-matic toolchain-funcs eutils \
 		gnome2-utils llvm mozcoreconf-v6 pax-utils xdg-utils \
-		autotools mozlinguas-v2 virtualx multiprocessing eapi7-ver
+		autotools mozlinguas-v2 virtualx eapi7-ver
 
 DESCRIPTION="Firefox Web Browser"
 HOMEPAGE="https://www.mozilla.com/firefox
@@ -46,9 +46,11 @@ IUSE="accessibility bindist clang cpu_flags_x86_avx2 debug egl eme-free geckodri
 	+gmp-autoupdate hardened hwaccel jack lto cpu_flags_arm_neon pgo
 	privacy pulseaudio +screenshot selinux startup-notification +system-av1
 	+system-harfbuzz +system-icu +system-jpeg +system-libevent
-	+system-sqlite +system-libvpx +system-webp test wayland wifi +dbus"
+	+system-sqlite +system-libvpx +system-webp test wayland wifi +dbus cross-lto thinlto"
 
 REQUIRED_USE="pgo? ( lto )
+	cross-lto? ( clang lto )
+	thinlto? ( lto )
 	kde? ( !bindist )
 	wifi? ( dbus )"
 
@@ -67,8 +69,8 @@ SRC_URI="${SRC_URI}
 	)"
 
 CDEPEND="
-	>=dev-libs/nss-3.46.1
-	>=dev-libs/nspr-4.22
+	>=dev-libs/nss-3.48
+	>=dev-libs/nspr-4.24
 	dev-libs/atk
 	dev-libs/expat
 	>=x11-libs/cairo-1.10[X]
@@ -106,7 +108,7 @@ CDEPEND="
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
 	system-libevent? ( >=dev-libs/libevent-2.0:0=[threads] )
 	system-libvpx? ( =media-libs/libvpx-1.7*:0=[postproc] )
-	system-sqlite? ( >=dev-db/sqlite-3.29.0:3[secure-delete,debug=] )
+	system-sqlite? ( >=dev-db/sqlite-3.30.1:3[secure-delete,debug=] )
 	system-webp? ( >=media-libs/libwebp-1.0.2:0= )
 	wifi? (
 		kernel_linux? (
@@ -127,7 +129,7 @@ RDEPEND="${CDEPEND}
 DEPEND="${CDEPEND}
 	app-arch/zip
 	app-arch/unzip
-	>=dev-util/cbindgen-0.9.1
+	>=dev-util/cbindgen-0.10.1
 	>=net-libs/nodejs-8.11.0
 	>=sys-devel/binutils-2.30
 	sys-apps/findutils
@@ -320,7 +322,7 @@ src_prepare() {
 	local PATCHES=(
 		"${WORKDIR}/firefox"
 		"${FILESDIR}/${PN}-69.0-lto-gcc-fix.patch"
-		"${FILESDIR}/${PN}-70.0.1-rust-1.39+.patch"
+		"${FILESDIR}/mozilla-bug1601707-gcc-fixup-72.patch"
 		"${FILESDIR}/debian-552426-553453.patch"
 		"${FILESDIR}/dont-build-image-gtests-72.patch"
 		"${FILESDIR}/Don-t-register-plugins-if-the-MOZILLA_DISABLE_PLUGIN.patch"
@@ -345,6 +347,13 @@ src_prepare() {
 		#PATCHES+=( "${FILESDIR}/${PN}-force-qt-dialog.patch" )
 		# ... _OR_ install the patch file as a User patch (/etc/portage/patches/www-client/firefox/)
 		# ... _OR_ add to your user .xinitrc: "xprop -root -f KDE_FULL_SESSION 8s -set KDE_FULL_SESSION true"
+	fi
+
+	if use system-harfbuzz; then
+		PATCHES+=(
+			"${FILESDIR}/2000_system_harfbuzz_support.patch"
+			"${FILESDIR}/2001_system_graphite2_support.patch"
+		)
 	fi
 
 	if use privacy; then
@@ -373,13 +382,13 @@ src_prepare() {
 		)
 	fi
 
-	default
-
-	local n_jobs=$(makeopts_jobs)
-	if [[ ${n_jobs} == 1 ]]; then
-		einfo "Building with MAKEOPTS=-j1 is known to fail (bug #687028); Forcing MAKEOPTS=-j2 ..."
-		export MAKEOPTS=-j2
+	if use !accessibility; then
+		PATCHES+=(
+			"${FILESDIR}/${PN}-$(get_major_version)-no-accessibility.patch"
+		)
 	fi
+
+	default
 
 	# Enable gnomebreakpad
 	if use debug; then
@@ -429,6 +438,9 @@ src_prepare() {
 	# Must run autoconf in js/src
 	cd "${S}"/js/src || die "cd failed"
 	eautoconf old-configure.in
+
+	# Clear checksums that present a problem
+	sed -i 's/\("files":{\)[^}]*/\1/' "${S}"/third_party/rust/backtrace-sys/.cargo-checksum.json || die "sed failed"
 }
 
 src_configure() {
@@ -538,10 +550,25 @@ src_configure() {
 			sleep 5
 		fi
 
-		mozconfig_annotate '+lto' --enable-lto=full
+		if use cross-lto ; then
+			mozconfig_annotate '+lto-cross' --enable-lto=cross
+			mozconfig_annotate '+lto-cross' MOZ_LTO=1
+			mozconfig_annotate '+lto-cross' MOZ_LTO=cross
+			mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
+		elif use thinlto ; then
+			mozconfig_annotate '+lto-thin' --enable-lto=thin
+			mozconfig_annotate '+lto-thin' MOZ_LTO=1
+			mozconfig_annotate '+lto-thin' MOZ_LTO=thin
+		else
+			mozconfig_annotate '+lto-full' --enable-lto=full
+			mozconfig_annotate '+lto-full' MOZ_LTO=1
+			mozconfig_annotate '+lto-full' MOZ_LTO=full
+		fi
 
 		if use pgo; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
+			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
+			mozconfig_annotate 'enable PGO on Rust code' --enable-cross-pgo
 		fi
 	else
 		# Avoid auto-magic on linker
@@ -574,6 +601,7 @@ src_configure() {
 			mozconfig_annotate '' --with-thumb-interwork=no
 		fi
 	fi
+
 	if [[ ${CHOST} == armv*h* ]]; then
 		mozconfig_annotate '' --with-float-abi=hard
 		if ! use system-libvpx; then
@@ -669,7 +697,7 @@ src_configure() {
 	# when they would normally be larger than 2GiB.
 	append-ldflags "-Wl,--compress-debug-sections=zlib"
 
-	if use clang ; then
+	if use clang && ! use arm64; then
 		# https://bugzilla.mozilla.org/show_bug.cgi?id=1482204
 		# https://bugzilla.mozilla.org/show_bug.cgi?id=1483822
 		mozconfig_annotate 'elf-hack is broken when using Clang' --disable-elf-hack

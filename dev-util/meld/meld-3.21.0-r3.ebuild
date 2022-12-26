@@ -2,21 +2,21 @@
 # Distributed under the terms of the GNU General Public License v2
 # "Linux distributions should switch to building with Meson"
 
-EAPI="6"
+EAPI=7
 PYTHON_REQ_USE="xml"
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{6..8} )
 DISTUTILS_SINGLE_IMPL=1
 DISTUTILS_USE_SETUPTOOLS=no
 
 inherit gnome2 distutils-r1
 
 DESCRIPTION="A graphical diff and merge tool"
-HOMEPAGE="http://meldmerge.org/"
+HOMEPAGE="http://${PN}merge.org/"
 
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="~alpha amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc x86 ~amd64-linux ~x86-linux"
-IUSE=""
+IUSE="l10n_zh-TW"
 
 RDEPEND="${PYTHON_DEPS}
 	>=dev-libs/glib-2.48:2
@@ -38,6 +38,11 @@ DEPEND="${RDEPEND}
 # dev-python/distro is soft-required in BDEPEND for python3.8 and onwards,
 # but it's mainly needed for debian and derivatives - seems the fallback
 # works fine, as we aren't a special_case, just an annoying warning.
+
+src_prepare() {
+	use l10n_zh-TW && eapply "${FILESDIR}"/0001-Update-Chinese-Taiwan-translation.patch
+	default
+}
 
 python_compile_all() {
 	mydistutilsargs=( --no-update-icon-cache --no-compile-schemas )

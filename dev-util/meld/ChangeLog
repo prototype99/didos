@@ -1,13 +1,15 @@
-*3.21.0-r2
+*meld-3.21.0-r3
+::protoype99
+-remove unnecessary quotes
+-switch to eapi 7
+*meld-3.21.0-r2
 ::protoype99
 -improve python use flags
-
-*3.21.0-r1
+*meld-3.21.0-r1
 ::protoype99
 -make better use of ${PN}
 -add l10n_zh-TW use flag
-
-*3.21.0
+*meld-3.21.0
 ::my-gnome
 -base ebuild
 ::prototype99

@@ -1,7 +1,7 @@
 # Copyright 2016-2018 Jan Chren (rindeal)
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 inherit rindeal
 
 PYTHON_COMPAT=( py{py3,thon{2_7,3_{5,6,7}}} )
