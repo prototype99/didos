@@ -1,3 +1,5 @@
+*libgdiplus-6.0.2-r1
+::prototype99	switch to eapi 7
 *libgdiplus-6.0.2
 ::gentoo		base ebuild
 ::prototype99	add build fix

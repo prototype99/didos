@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 GNOME2_LA_PUNT="yes"
 VALA_USE_DEPEND="vapigen"
 
@@ -39,6 +39,11 @@ DEPEND="${RDEPEND}
 "
 # >=gtk-doc-am-1.13, gobject-introspection-common, vala-common needed by eautoreconf
 
+# Rust does not know the *-pc-* variants of target triples, but these ones.
+CHOST_amd64=x86_64-unknown-linux-gnu
+CHOST_x86=i686-unknown-linux-gnu
+CHOST_arm64=aarch64-unknown-linux-gnu
+
 src_prepare() {
 	local build_dir
 
@@ -71,6 +76,7 @@ multilib_src_configure() {
 	ECONF_SOURCE=${S} \
 	cross_compiling=yes \
 	gnome2_src_configure \
+		--build=${CHOST_default} \
 		--disable-static \
 		--disable-tools \
 		$(use_enable debug) \

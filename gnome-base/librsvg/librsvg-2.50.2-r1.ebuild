@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 GNOME2_LA_PUNT="yes"
 VALA_USE_DEPEND="vapigen"
 
@@ -30,7 +30,7 @@ RDEPEND="
 	tools? ( >=x11-libs/gtk+-3.10.0:3 )
 "
 DEPEND="${RDEPEND}
-	>=virtual/rust-1.39[${MULTILIB_USEDEP}]
+	>=virtual/rust-1.40[${MULTILIB_USEDEP}]
 	dev-util/glib-utils
 	>=sys-devel/gettext-0.19.8
 	>=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}]
@@ -40,6 +40,8 @@ DEPEND="${RDEPEND}
 # >=gtk-doc-am-1.13, gobject-introspection-common, vala-common needed by eautoreconf
 
 RESTRICT="test" # Lots of issues on 32bit builds, 64bit build seems to get into an infinite compilation sometimes, etc.
+
+PATCHES=( "${FILESDIR}/lto.diff" )
 
 src_prepare() {
 	use vala && vala_src_prepare

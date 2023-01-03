@@ -8,6 +8,8 @@
 -update dependencies and ordering
 -update to meson
 -remove old workaround
+*gcr-3.34.0-r3
+::prototype99			switch to eapi 7
 *gcr-3.34.0-r2
 ::prototype99			improve python use flags
 *gcr-3.34.0-r1

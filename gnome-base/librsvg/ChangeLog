@@ -1,7 +1,11 @@
-*2.50.2
+*librsvg-2.50.2-r1
+::prototype99	switch to eapi 8
+*librsvg-2.50.2
 ::pg_overlay	add lto compatibility
 ::prototype99	bump dependency
-*2.49.3
+*librsvg-2.49.3-r1
+::prototype99	switch to eapi 8
+*librsvg-2.49.3
 ::gnome-next	base ebuild
 ::pg_overlay
 -add sparc keyword
@@ -9,9 +13,12 @@
 -improve dependency versioning
 -add darwin workaround
 -do not turn on vala by default
-*2.46.3
+*librsvg-2.46.3-r1
+::prototype99	switch to eapi 7
+*librsvg-2.46.3
 ::prototype99	add rust fix
-*<=2.45.90
+*<=librsvg-2.45.90-r1
 ::gentoo		gtk3 patch
 ::gnome			debug use flag
 ::gnome-next	prevent incompatible rust-bin
+::prototype99	switch to eapi 7

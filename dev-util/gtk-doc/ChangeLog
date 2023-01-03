@@ -1,10 +1,10 @@
+*gtk-doc-1.32-r4
+::prototype99			switch to eapi 7
 *gtk-doc-1.32-r3
 ::dantrell-gnome		improve python compatibility, add fix for dev-libs/glib[gtk-doc]
 ::prototype99			improve use of PN
-
 *gtk-doc-1.32-r2
 ::prototype99			improve python use flags
-
 *gtk-doc-1.32-r1
 	::gentoo			base ebuild
 	::lanodanOverlay	python3_5 support, pdf use flag, test use flag, doc use flag dependency

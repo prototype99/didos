@@ -1,9 +1,9 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 VALA_USE_DEPEND="vapigen"
-PYTHON_COMPAT=( python3_{5,6,7,8} )
+PYTHON_COMPAT=( python3_{5..8} )
 GNOME2_EAUTORECONF="yes"
 
 inherit gnome2 python-any-r1 vala virtualx
