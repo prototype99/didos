@@ -1,3 +1,5 @@
+*m2crypto-0.35.1-r1
+::prototype99	add python3_9 support
 *m2crypto-0.35.1
 ::gentoo		base ebuild
 ::muslx32		add missing dependency versioning, add muslx32 patch

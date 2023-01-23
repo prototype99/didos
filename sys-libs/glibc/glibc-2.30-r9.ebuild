@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6..8} )
+PYTHON_COMPAT=( python3_{6..9} )
 
 inherit python-any-r1 prefix eutils toolchain-funcs flag-o-matic gnuconfig \
 	multilib systemd multiprocessing
@@ -15,16 +15,28 @@ SLOT="2.2"
 
 EMULTILIB_PKG="true"
 
-KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
-SRC_URI="mirror://gnu/glibc/${P}.tar.xz"
-SRC_URI+=" https://dev.gentoo.org/~dilfridge/distfiles/${P}-patches-8.tar.xz"
+if [[ ${PV} == 9999* ]]; then
+	EGIT_REPO_URI="https://sourceware.org/git/glibc.git"
+	inherit git-r3
+else
+	KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
+	SRC_URI="mirror://gnu/glibc/${P}.tar.xz"
+fi
+
+RELEASE_VER=${PV}
+
+GCC_BOOTSTRAP_VER=20180511
+
+# Gentoo patchset
+PATCH_VER=10
+PATCH_DEV=dilfridge
 
 IDN=">=net-dns/libidn2-2.3.0"
 
-SRC_URI+=" https://gitweb.gentoo.org/proj/locale-gen.git/snapshot/locale-gen-2.00.tar.gz"
-SRC_URI+=" multilib? ( https://dev.gentoo.org/~dilfridge/distfiles/gcc-multilib-bootstrap-20180511.tar.xz )"
+SRC_URI+=" https://dev.gentoo.org/~${PATCH_DEV}/distfiles/${P}-patches-${PATCH_VER}.tar.xz"
+SRC_URI+=" multilib? ( https://dev.gentoo.org/~dilfridge/distfiles/gcc-multilib-bootstrap-${GCC_BOOTSTRAP_VER}.tar.xz )"
 
-IUSE="audit caps cet compile-locales +crypt custom-cflags doc gd headers-only +multiarch multilib nscd profile selinux +ssp +static-libs static-pie suid systemtap test vanilla"
+IUSE="audit caps cet compile-locales +crypt custom-cflags doc gd headers-only +multiarch multilib nscd profile selinux +ssp +static-libs suid systemtap test vanilla"
 
 # Minimum kernel version that glibc requires
 MIN_KERN_VER="3.2.0"
@@ -125,6 +137,16 @@ GENTOO_GLIBC_XFAIL_TESTS="${GENTOO_GLIBC_XFAIL_TESTS:-yes}"
 # The following tests fail due to the Gentoo build system and are thus
 # executed but ignored:
 XFAIL_TEST_LIST=(
+	# 1) Sandbox
+	tst-ldconfig-bad-aux-cache
+	tst-pldd
+	tst-mallocfork2
+	tst-nss-db-endgrent
+	tst-nss-db-endpwent
+	tst-nss-files-hosts-long
+	tst-nss-test3
+	# 2) Namespaces and cgroup
+	tst-locale-locpath
 	# 9) Failures of unknown origin
 	tst-latepthread
 )
@@ -199,8 +221,7 @@ do_compile_test() {
 	rm -f glibc-test*
 	printf '%b' "$*" > glibc-test.c
 
-	# Most of the time CC is already set, but not in early sanity checks.
-	nonfatal emake glibc-test CC="${CC-$(tc-getCC ${CTARGET})}"
+	nonfatal emake glibc-test
 	ret=$?
 
 	popd >/dev/null
@@ -530,7 +551,7 @@ foreach_abi() {
 
 glibc_banner() {
 	local b="Gentoo ${PVR}"
-	[[ -n 8 ]] && ! use vanilla && b+=" p8"
+	[[ -n ${PATCH_VER} ]] && ! use vanilla && b+=" p${PATCH_VER}"
 	echo "${b}"
 }
 
@@ -768,22 +789,23 @@ src_unpack() {
 	# Consistency is not guaranteed between pkg_ and src_ ...
 	sanity_prechecks
 
-	use multilib && unpack gcc-multilib-bootstrap-20180511.tar.xz
+	use multilib && unpack gcc-multilib-bootstrap-${GCC_BOOTSTRAP_VER}.tar.xz
 
 	setup_env
 
-	unpack ${P}.tar.xz
+	if [[ -n ${EGIT_REPO_URI} ]] ; then
+		git-r3_src_unpack
+	else
+		unpack ${P}.tar.xz
+	fi
 
 	cd "${WORKDIR}" || die
-	unpack ${P}-patches-8.tar.xz
-
-	cd "${WORKDIR}" || die
-	unpack locale-gen-2.00.tar.gz
+	unpack glibc-${RELEASE_VER}-patches-${PATCH_VER}.tar.xz
 }
 
 src_prepare() {
 	if ! use vanilla ; then
-		elog "Applying Gentoo Glibc Patchset 2.31-8"
+		elog "Applying Gentoo Glibc Patchset ${RELEASE_VER}-${PATCH_VER}"
 		eapply "${WORKDIR}"/patches
 		einfo "Done."
 	fi
@@ -794,10 +816,6 @@ src_prepare() {
 
 	cd "${WORKDIR}"
 	find . -name configure -exec touch {} +
-
-	# move the external locale-gen to its old place
-	mkdir extra || die
-	mv locale-gen-2.00 extra/locale || die
 
 	eprefixify extra/locale/locale-gen
 
@@ -824,7 +842,7 @@ glibc_do_configure() {
 	fi
 
 	local v
-	for v in ABI CBUILD CHOST CTARGET CBUILD_OPT CTARGET_OPT CC CXX LD {AS,C,CPP,CXX,LD}FLAGS MAKEINFO NM READELF; do
+	for v in ABI CBUILD CHOST CTARGET CBUILD_OPT CTARGET_OPT CC CXX LD {AS,C,CPP,CXX,LD}FLAGS MAKEINFO ; do
 		einfo " $(printf '%15s' ${v}:)   ${!v}"
 	done
 
@@ -852,14 +870,6 @@ glibc_do_configure() {
 		export CXX=
 	fi
 	einfo " $(printf '%15s' 'Manual CXX:')   ${CXX}"
-
-	# Always use tuple-prefixed toolchain. For non-native ABI glibc's configure
-	# can't detect them automatically due to ${CHOST} mismatch and fallbacks
-	# to unprefixed tools. Similar to multilib.eclass:multilib_toolchain_setup().
-	export NM="$(tc-getNM ${CTARGET})"
-	export READELF="$(tc-getREADELF ${CTARGET})"
-	einfo " $(printf '%15s' 'Manual NM:')   ${NM}"
-	einfo " $(printf '%15s' 'Manual READELF:')   ${READELF}"
 
 	echo
 
@@ -956,7 +966,6 @@ glibc_do_configure() {
 		--with-pkgversion="$(glibc_banner)"
 		$(use_enable crypt)
 		$(use_multiarch || echo --disable-multi-arch)
-		$(use_enable static-pie)
 		$(use_enable systemtap)
 		$(use_enable nscd)
 		${EXTRA_ECONF}
@@ -1001,10 +1010,10 @@ glibc_do_configure() {
 	# is built with MULTILIB_ABIS="amd64 x86" but we want to
 	# add x32 to it, gcc/glibc don't yet support x32.
 	#
-	if [[ -n 20180511 ]] && use multilib ; then
+	if [[ -n ${GCC_BOOTSTRAP_VER} ]] && use multilib ; then
 		echo 'main(){}' > "${T}"/test.c
 		if ! $(tc-getCC ${CTARGET}) ${CFLAGS} ${LDFLAGS} "${T}"/test.c -Wl,-emain -lgcc 2>/dev/null ; then
-			sed -i -e '/^CC = /s:$: -B$(objdir)/../'"gcc-multilib-bootstrap-20180511/${ABI}:" config.make || die
+			sed -i -e '/^CC = /s:$: -B$(objdir)/../'"gcc-multilib-bootstrap-${GCC_BOOTSTRAP_VER}/${ABI}:" config.make || die
 		fi
 	fi
 }
@@ -1157,11 +1166,7 @@ glibc_src_test() {
 			myxfailparams+="test-xfail-${myt}=yes "
 		done
 	fi
-
-	# sandbox does not understand unshare() and prevents
-	# writes to /proc/, which makes many tests fail
-
-	SANDBOX_ON=0 LD_PRELOAD= emake ${myxfailparams} check
+	emake ${myxfailparams} check
 }
 
 do_src_test() {
@@ -1203,10 +1208,8 @@ run_locale_gen() {
 		locale_list="${root}/usr/share/i18n/SUPPORTED"
 	fi
 
-	set -- locale-gen ${inplace} --jobs $(makeopts_jobs) --config "${locale_list}" \
+	locale-gen ${inplace} --jobs $(makeopts_jobs) --config "${locale_list}" \
 		--destdir "${root}"
-	echo "$@"
-	"$@"
 
 	popd >/dev/null
 }
@@ -1366,15 +1369,11 @@ glibc_do_src_install() {
 
 	# Install misc network config files
 	insinto /etc
-	doins posix/gai.conf nss/nsswitch.conf
-
-	# Gentoo-specific
-	newins "${FILESDIR}"/host.conf-1 host.conf
+	doins nscd/nscd.conf posix/gai.conf nss/nsswitch.conf
+	doins "${WORKDIR}"/extra/etc/*.conf
 
 	if use nscd ; then
-		doins nscd/nscd.conf
-
-		newinitd "$(prefixify_ro "${FILESDIR}"/nscd-1)" nscd
+		doinitd "$(prefixify_ro "${WORKDIR}"/extra/etc/nscd)"
 
 		local nscd_args=(
 			-e "s:@PIDFILE@:$(strings "${ED}"/usr/sbin/nscd | grep nscd.pid):"
@@ -1384,6 +1383,9 @@ glibc_do_src_install() {
 
 		systemd_dounit nscd/nscd.service
 		systemd_newtmpfilesd nscd/nscd.tmpfiles nscd.conf
+	else
+		# Do this since extra/etc/*.conf above might have nscd.conf.
+		rm -f "${ED}"/etc/nscd.conf
 	fi
 
 	echo 'LDPATH="include ld.so.conf.d/*.conf"' > "${T}"/00glibc

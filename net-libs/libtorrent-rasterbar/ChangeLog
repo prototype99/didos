@@ -1,11 +1,8 @@
+*libtorrent-rasterbar-1.2.6-r1
+::prototype99	add python3_9 support
 *libtorrent-rasterbar-1.2.6
-::prototype99
--improve python use flags
-
+::prototype99	improve python use flags
 *libtorrent-rasterbar-1.1.13-r1
-::prototype99
--improve python use flags
-
+::prototype99	improve python use flags
 *libtorrent-rasterbar-1.1.12-r1
-::prototype99
--improve python use flags
+::prototype99	improve python use flags

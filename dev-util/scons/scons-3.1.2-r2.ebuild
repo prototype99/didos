@@ -2,23 +2,26 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python{2_7,3_{5..8}} )
+
+# False positive due to commented code in setup.py
+DISTUTILS_USE_SETUPTOOLS=manual
+PYTHON_COMPAT=( python{2_7,3_{5..9}} )
 PYTHON_REQ_USE="threads(+)"
 
 inherit distutils-r1
 
 DESCRIPTION="Extensible Python-based build utility"
-HOMEPAGE="http://www.scons.org/"
+HOMEPAGE="https://www.scons.org/"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz
 	doc? (
-		http://www.scons.org/doc/${PV}/PDF/${PN}-user.pdf -> ${P}-user.pdf
-		http://www.scons.org/doc/${PV}/HTML/${PN}-user.html -> ${P}-user.html
+		https://www.scons.org/doc/${PV}/PDF/${PN}-user.pdf -> ${P}-user.pdf
+		https://www.scons.org/doc/${PV}/HTML/${PN}-user.html -> ${P}-user.html
 	)
 	test? ( https://github.com/scons/scons/archive/${PV}.tar.gz -> ${P}.gh.tar.gz )"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~x64-cygwin ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha amd64 arm ~arm64 hppa ~ia64 ~m68k ~mips ppc ppc64 s390 ~sh sparc x86 ~x64-cygwin ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
 IUSE="doc test"
 RESTRICT="!test? ( test )"
 

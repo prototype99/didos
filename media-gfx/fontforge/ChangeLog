@@ -1,10 +1,14 @@
 *fontforge-20200815
 ::gentoo		python3_9 compatibility, fix being keywordn't
 ::prototype99	prefer our NUM variable use for github snapshots
+*fontforge-20200320-r1
+::prototype99	add python3_9 support
 *fontforge-20200320
 ::4nykey		alter libspiro dependency location
 ::gentoo		add big endian patch, update dependencies, update workarounds
 ::prototype99	improve patch logic, make better use of PV, trial not having python use flag default to on, switch to a version that makes more sense
+*fontforge-20200314-r2
+::prototype99	add python3_9 support
 *fontforge-20200314-r1
 ::prototype99	improve python use flags
 *fontforge-20200314

@@ -1,6 +1,9 @@
-*0.17.4
-	::prototype99	improve python use flags
-
-*0.17.3
-	::gentoo		update copyright, update eapi, add python3_8 support, update dependencies, update formatting, update inherits
-	::prototype99	make use of PN, add the actual homepage
+*kitty-0.17.4-r1
+::prototype99	add python3_9 support
+*kitty-0.17.4
+::prototype99	improve python use flags
+*kitty-0.17.3-r1
+::prototype99	add python3_9 support
+*kitty-0.17.3
+::gentoo		update copyright, update eapi, add python3_8 support, update dependencies, update formatting, update inherits
+::prototype99	make use of PN, add the actual homepage

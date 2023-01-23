@@ -1,0 +1,1 @@
+kitty-0.17.4-r1.ebuild

@@ -1,16 +1,13 @@
+*scons-3.1.2-r2
+::prototype99	add python3_9 support
 *scons-3.1.2-r1
-::prototype99
--improve python use flags
-
+::prototype99	improve python use flags
 *scons-3.1.2
-
-	8.5.2020	::gentoo	updated workarounds, switch to https, updated keywords
-
+::gentoo		updated workarounds, switch to https, updated keywords
+*scons-3.1.1-r2
+::prototype99	add python3_9 support
 *scons-3.1.1-r1
-::prototype99
--improve python use flags
-
+::prototype99	improve python use flags
 *scons-3.1.1
-
-	12.1.2020	::pg_overlay	add python3_8 support, update year
-	?????????	::gentoo		base ebuild
+::gentoo		base ebuild
+::pg_overlay	add python3_8 support, update year

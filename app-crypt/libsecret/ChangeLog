@@ -2,6 +2,8 @@
 ::myrvolay		add keepassxc support
 *libsecret-0.20.4
 ::gentoo		eapi7, add python3_9 compatibility, switch to meson, gtk-doc use flag
+*libsecret-0.20.2-r2
+::prototype99	add python3_9 support
 *libsecret-0.20.2-r1
 ::prototype99	switch to eapi 7
 *libsecret-0.20.2

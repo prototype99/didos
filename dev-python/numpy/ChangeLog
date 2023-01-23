@@ -1,13 +1,9 @@
+*numpy-1.16.5-r3
+::prototype99	add python3_9 support
 *numpy-1.16.5-r2
-::prototype99
--improve python use flags
-
+::prototype99	improve python use flags
 *numpy-1.14.5-r1
-::prototype99
--improve python use flags
-
+::prototype99	improve python use flags
 *???
-::gentoo
--base ebuild
-::prototype99
--extra python compatibility
+::gentoo		base ebuild
+::prototype99	extra python compatibility

@@ -2,18 +2,21 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_{6..8} )
+PYTHON_COMPAT=( python3_{6..9} )
 
 inherit python-single-r1 xdg cmake
 
 DESCRIPTION="postscript font editor and converter"
 HOMEPAGE="https://${PN}.org/"
-SRC_URI="https://github.com/${PN}/${PN}/releases/download/${PV}/${PN}-${PV}.tar.xz"
+MY_PV="43e6087ec9bdbb23b8bb61c07efe6490fab23d73"
+SRC_URI="https://github.com/${PN}/${PN}/archive/${MY_PV}.zip -> ${P}.zip"
+S="${WORKDIR}/${PN}-${MY_PV}"
 
 LICENSE="BSD GPL-3+"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm ~arm64 ~hppa ~ia64 ~mips ppc ~ppc64 ~s390 ~sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
-IUSE="doc truetype-debugger extras gif gtk gui jpeg libspiro png +python readline test tiff svg unicode woff2 X"
+IUSE="doc truetype-debugger gif gtk jpeg png python readline test tiff svg unicode woff2 X"
+IUSE+=" extras libspiro"
+IUSE+=" gui"
 RESTRICT="!test? ( test )"
 
 REQUIRED_USE="
@@ -39,28 +42,31 @@ RDEPEND="
 		x11-libs/libXi:0=
 	)
 	python? ( ${PYTHON_DEPS} )
-	libspiro? ( media-libs/libspiro )
 	readline? ( sys-libs/readline:0= )
 	unicode? ( media-libs/libuninameslist:0= )
 	woff2? ( media-libs/woff2:0= )
+	libspiro? ( media-libs/libspiro )
 "
 DEPEND="${RDEPEND}
 	X? ( x11-base/xorg-proto )
 "
 BDEPEND="
 	sys-devel/gettext
-	doc? ( dev-python/sphinx )
+	doc? ( >=dev-python/sphinx-2 )
 	python? ( ${PYTHON_DEPS} )
 	test? ( ${RDEPEND} )
 "
 
-PATCHES=(
-	"${FILESDIR}"/20200314-stylemap.patch
-	"${FILESDIR}"/20200314-tilepath.patch
-)
-
 pkg_setup() {
 	:
+}
+
+src_prepare() {
+	[[ $(tc-endian) == "big" ]] && eapply "${FILESDIR}"/${PV}-big-endian.patch
+	use elibc_musl && eapply "${FILESDIR}"/${PV}-MacServiceReadFDs.patch
+	use sparc && eapply "${FILESDIR}"/${PV}-stylemap.patch
+	cmake_src_prepare
+	default
 }
 
 src_configure() {
@@ -73,6 +79,7 @@ src_configure() {
 		-DENABLE_LIBSPIRO=$(usex libspiro ON OFF)
 		-DENABLE_LIBTIFF=$(usex tiff ON OFF)
 		-DENABLE_LIBUNINAMESLIST=$(usex unicode ON OFF)
+		-DENABLE_MAINTAINER_TOOLS=OFF
 		-DENABLE_PYTHON_EXTENSION=$(usex python ON OFF)
 		-DENABLE_GUI=$(usex gui ON OFF)
 		-DENABLE_X11=$(usex X ON OFF)
@@ -88,7 +95,12 @@ src_configure() {
 	fi
 
 	if use truetype-debugger ; then
-		mycmakeargs+=( -DENABLE_FREETYPE_DEBUGGER="${EPREFIX}/usr/include/freetype2/internal4fontforge" )
+		local ft2="${ESYSROOT}/usr/include/freetype2"
+		local ft2i="${ft2}/internal4fontforge"
+		mycmakeargs+=(
+			-DENABLE_FREETYPE_DEBUGGER="${ft2}"
+			-DFreeTypeSource_INCLUDE_DIRS="${ft2};${ft2i}/include;${ft2i}/include/freetype;${ft2i}/src/truetype"
+		)
 	fi
 
 	cmake_src_configure
