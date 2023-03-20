@@ -7,7 +7,7 @@ WANT_LIBTOOL="none"
 inherit autotools flag-o-matic pax-utils ${PN}-utils-r1 toolchain-funcs
 
 MY_P="Python-${PV}"
-PATCHSET="${PN}-gentoo-patches-${PV}"
+PATCHSET="${PN}-gentoo-patches-${PV}-r2"
 
 DESCRIPTION="An interpreted, interactive, object-oriented programming language"
 HOMEPAGE="https://www.${PN}.org/"
