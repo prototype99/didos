@@ -1,0 +1,414 @@
+diff --git a/build.xml b/build.xml
+index c61ab56..8305f04 100644
+--- a/build.xml
++++ b/build.xml
+@@ -129,7 +129,7 @@
+        ===================================================================
+   -->
+   <path id="classpath">
+-    <fileset dir="lib/optional" includes="*.jar"/>
++    <fileset dir="${lib.dir}" includes="**/*.jar"/>
+   </path>
+ 
+   <path id="tests-classpath">
+@@ -343,28 +343,7 @@
+   <selector id="ant.core">
+     <not>
+       <or>
+-        <selector refid="needs.antlr"/>
+-        <selector refid="needs.apache-bcel"/>
+-        <selector refid="needs.apache-bsf"/>
+-        <selector refid="needs.apache-log4j"/>
+-        <selector refid="needs.apache-oro"/>
+-        <selector refid="needs.apache-regexp"/>
+-        <selector refid="needs.apache-resolver"/>
+-        <selector refid="needs.apache-xalan2"/>
+-        <selector refid="needs.commons-logging"/>
+-        <selector refid="needs.commons-net"/>
+-        <selector refid="needs.imageio"/>
+-        <selector refid="needs.jai"/>
+-        <selector refid="needs.javamail"/>
+-        <selector refid="needs.jdepend"/>
+-        <selector refid="needs.jmf"/>
+-        <selector refid="needs.jsch"/>
+-        <selector refid="needs.junit"/>
+-        <selector refid="needs.junit4"/>
+-        <selector refid="needs.junitlauncher"/>
+-        <selector refid="needs.netrexx"/>
+-        <selector refid="needs.swing"/>
+-        <selector refid="needs.xz"/>
++        <selector refid="deps"/>
+         <selector refid="ant.launcher"/>
+       </or>
+     </not>
+@@ -409,6 +388,33 @@
+     <include name="${ant.package}/types/AbstractFileSetTest*"/>
+   </patternset>
+ 
++  <selector id="deps">
++    <or>
++      <selector refid="needs.antlr"/>
++      <selector refid="needs.apache-bcel"/>
++      <selector refid="needs.apache-bsf"/>
++      <selector refid="needs.apache-log4j"/>
++      <selector refid="needs.apache-oro"/>
++      <selector refid="needs.apache-regexp"/>
++      <selector refid="needs.apache-resolver"/>
++      <selector refid="needs.apache-xalan2"/>
++      <selector refid="needs.commons-logging"/>
++      <selector refid="needs.commons-net"/>
++      <selector refid="needs.jai"/>
++      <selector refid="needs.javamail"/>
++      <selector refid="needs.jdepend"/>
++      <selector refid="needs.jmf"/>
++      <selector refid="needs.jsch"/>
++      <selector refid="needs.junit"/>
++      <selector refid="needs.junit4"/>
++      <selector refid="needs.junitlauncher"/>
++      <selector refid="needs.netrexx"/>
++      <selector refid="needs.swing"/>
++      <selector refid="needs.xz"/>
++      <selector refid="ant.launcher"/>
++    </or>
++  </selector>
++
+   <!--
+        ===================================================================
+          Check to see what optional dependencies are available
+@@ -422,9 +428,6 @@
+     </condition>
+     <property name="ignoresystemclasses" value="false"/>
+     <available property="jdk9+" classname="java.lang.module.ModuleDescriptor"/>
+-    <condition property="jdk10+">
+-      <javaversion atleast="10"/>
+-    </condition>
+     <available property="kaffe" classname="kaffe.util.NotImplemented"/>
+     <available property="harmony"
+                classname="org.apache.harmony.luni.util.Base64"/>
+@@ -588,43 +591,6 @@
+     <filterchain id="ant.filters">
+        <expandproperties/>
+     </filterchain>
+-  </target>
+-
+-  <!--
+-       ===================================================================
+-         Build the code
+-       ===================================================================
+-  -->
+-  <target name="build" depends="prepare, compile, compile-jdk9+" unless="skip.build"
+-          description="--> compiles the source code">
+-
+-    <!-- Builds and verifies that the classes belonging in the confined package of
+-    junitlauncher task do not depend on classes they aren't meant to -->
+-    <!-- first wipe out the "confined" package that might have been built already
+-     due to the javac above -->
+-    <delete dir="${build.classes}/${optional.package}/junitlauncher/confined/"/>
+-    <javac srcdir="${java.dir}"
+-           includeantruntime="false"
+-           destdir="${build.classes}"
+-           debug="${debug}"
+-           deprecation="${deprecation}"
+-           includes="${optional.package}/junitlauncher/confined/**"
+-           target="${javac.target}"
+-           source="${javac.source}"
+-           release="${javac.release}"
+-           optimize="${optimize}">
+-      <classpath>
+-        <!-- A very limited classpath which only doesn't include optional libraries,
+-         which the classes in confined package aren't meant to depend on -->
+-        <fileset dir="${build.classes}">
+-          <!-- exclude the org/apache/tools/ant/taskdefs/optional/junitlauncher package
+-          from the classpath, since the confined package isn't meant to depend on
+-          classes in this package -->
+-          <exclude name="org/apache/tools/ant/taskdefs/optional/junitlauncher/*"/>
+-        </fileset>
+-      </classpath>
+-
+-    </javac>
+ 
+     <copy todir="${build.classes}">
+       <fileset dir="${java.dir}">
+@@ -644,30 +610,6 @@
+       <filterchain refid="ant.filters"/>
+     </copy>
+ 
+-    <copy todir="${build.classes}/${optional.package}/junit/xsl">
+-      <fileset dir="${etc.dir}">
+-        <include name="junit-frames.xsl"/>
+-        <include name="junit-noframes.xsl"/>
+-        <include name="junit-frames-saxon.xsl"/>
+-        <include name="junit-noframes-saxon.xsl"/>
+-      </fileset>
+-    </copy>
+-  </target>
+-
+-  <target name="compile" depends="prepare">
+-    <mkdir dir="${build.classes}"/>
+-    <javac srcdir="${java.dir}"
+-           includeantruntime="false"
+-           destdir="${build.classes}"
+-           debug="${debug}"
+-           deprecation="${deprecation}"
+-           excludes="${optional.package}/junitlauncher/confined/**"
+-           target="${javac.target}"
+-           source="${javac.source}"
+-           release="${javac.release}"
+-           optimize="${optimize}">
+-      <classpath refid="classpath"/>
+-
+       <selector id="conditional-patterns">
+         <not>
+           <or>
+@@ -701,6 +643,64 @@
+           </or>
+         </not>
+       </selector>
++  </target>
++
++  <!--
++       ===================================================================
++         Build the code
++       ===================================================================
++  -->
++  <target name="build" depends="build-core, build-deps"
++          description="--> compiles the source code">
++  </target>
++
++  <presetdef name="javac.ant">
++    <javac srcdir="${java.dir}"
++           includeantruntime="false"
++           destdir="${build.classes}"
++           debug="${debug}"
++           deprecation="${deprecation}"
++           target="${javac.target}"
++           source="${javac.source}"
++           optimize="${optimize}">
++      <classpath refid="classpath"/>
++    </javac>
++  </presetdef>
++
++  <target name="build-core" depends="prepare">
++    <javac.ant>
++      <selector id="core">
++        <not>
++          <selector refid="deps"/>
++        </not>
++      </selector>
++    </javac.ant>
++  </target>
++
++  <target name="copy.junit.xsl">
++    <copy todir="${build.classes}/${optional.package}/junit/xsl">
++      <fileset dir="${etc.dir}">
++        <include name="junit-frames.xsl"/>
++        <include name="junit-noframes.xsl"/>
++        <include name="junit-frames-saxon.xsl"/>
++        <include name="junit-noframes-saxon.xsl"/>
++      </fileset>
++    </copy>
++  </target>
++
++  <target name="compile" depends="prepare">
++    <mkdir dir="${build.classes}"/>
++    <javac srcdir="${java.dir}"
++           includeantruntime="false"
++           destdir="${build.classes}"
++           debug="${debug}"
++           deprecation="${deprecation}"
++           excludes="${optional.package}/junitlauncher/confined/**"
++           target="${javac.target}"
++           source="${javac.source}"
++           release="${javac.release}"
++           optimize="${optimize}">
++      <classpath refid="classpath"/>
+     </javac>
+   </target>
+ 
+@@ -725,13 +725,46 @@
+     </javac>
+   </target>
+ 
++  <target name="build-deps" depends="prepare">
++    <javac.ant>
++      <selector id="conditional-deps">
++        <and>
++          <selector refid="conditional-patterns"/>
++          <selector refid="deps"/>
++        </and>
++      </selector>
++    </javac.ant>
++  </target>
++
++  <target name="build-junit" depends="prepare">
++    <javac.ant>
++      <selector refid="needs.junit"/>
++    </javac.ant>
++  </target>
++
++  <target name="build-junit4" depends="prepare">
++    <javac.ant>
++      <selector refid="needs.junit4"/>
++    </javac.ant>
++  </target>
++
++  <target name="build-dep" depends="prepare">
++    <javac.ant>
++      <selector refid="needs.${build.dep}"/>
++    </javac.ant>
++  </target>
++
+   <!--
+        ===================================================================
+          Create the all of the Apache Ant jars
+        ===================================================================
+   -->
+-  <target name="jars" depends="build"
+-          description="--> creates the Apache Ant jars">
++  <target name="jars" depends="jars-core, jars-tasks"
++          description="--> creates the Apache Ant jars" />
++
++  <target name="jars-core" depends="jar-launcher, jar-ant, jar-bootstrap" />
++
++  <target name="jars-prep">
+ 
+     <copy todir="${build.dir}">
+       <fileset dir="${basedir}">
+@@ -743,7 +776,9 @@
+       </fileset>
+       <mapper type="glob" from="*" to="*.txt"/>
+     </copy>
++  </target>
+ 
++  <target name="jar-launcher" depends="build-core, jars-prep">
+     <jar destfile="${build.lib}/${name}-launcher.jar"
+          basedir="${build.classes}" index="true"
+          whenmanifestonly="fail">
+@@ -756,6 +791,9 @@
+         <attribute name="Main-Class" value="org.apache.tools.ant.launch.Launcher"/>
+       </manifest>
+     </jar>
++  </target>
++
++  <target name="jar-ant" depends="build-core, jars-prep">
+ 
+     <jar destfile="${build.lib}/${name}.jar"
+          basedir="${build.classes}" index="true"
+@@ -790,7 +828,9 @@
+         <include name="images/ant_logo_large.gif"/>
+       </fileset>
+     </jar>
++  </target>
+ 
++  <target name="jar-bootstrap" depends="build-core, jars-prep">
+     <jar destfile="${build.lib}/${bootstrap.jar}"
+          basedir="${build.classes}"
+          whenmanifestonly="fail">
+@@ -804,6 +844,7 @@
+         <attribute name="Class-Path" value="ant.jar xalan.jar"/>
+       </manifest>
+     </jar>
++  </target>
+ 
+     <macrodef name="optional-jar">
+       <attribute name="dep"/>
+@@ -838,6 +879,7 @@
+       </sequential>
+     </macrodef>
+ 
++  <target name="jars-tasks" depends="build-deps, copy.junit.xsl">
+     <optional-jar dep="apache-resolver"/>
+     <optional-jar dep="junit"/>
+     <optional-jar dep="junit4"/>
+@@ -863,6 +905,18 @@
+ 
+   </target>
+ 
++  <target name="jar-dep" depends="build-dep, jars-prep">
++    <optional-jar dep="${build.dep}"/>
++  </target>
++
++  <target name="jar-junit" depends="build-junit, copy.junit.xsl, jars-prep">
++    <optional-jar dep="junit"/>
++  </target>
++
++  <target name="jar-junit4" depends="build-junit4, copy.junit.xsl, jars-prep">
++    <optional-jar dep="junit4"/>
++  </target>
++
+   <!--   Creates jar of test utility classes -->
+   <target name="test-jar" depends="compile-tests"
+           description="--> creates the Apache Ant Test Utilities jar">
+@@ -976,7 +1030,7 @@
+          Create the essential distribution that can run Apache Ant
+        ===================================================================
+   -->
+-  <target name="dist-lite" depends="jars,test-jar,-ant-dist-warn-jdk9+"
++  <target name="dist-lite-internal"
+           description="--> creates a minimum distribution to run Apache Ant">
+ 
+     <mkdir dir="${dist.dir}"/>
+@@ -1027,6 +1081,10 @@
+ 
+   </target>
+ 
++  <target name="dist-lite" depends="jars, test-jar, dist-lite-internal"/>
++
++  <target name="dist-bootstrap" depends="jars-core, dist-lite-internal"/>
++
+   <!--
+         ===================================================================
+           Create the complete distribution
+@@ -1054,10 +1112,11 @@
+     </sequential>
+   </macrodef>
+ 
+-  <target name="dist-internal" depends="dist-lite,dist-javadocs">
+-    <mkdir dir="${dist.manual}"/>
++  <target name="dist-internal">
++    <!-- mkdir dir="${dist.manual}"/ -->
+     <mkdir dir="${dist.etc}"/>
+ 
++<!--
+     <copy todir="${dist.lib}" file="${lib.dir}/README"/>
+     <copy todir="${dist.lib}" file="${lib.dir}/libraries.properties"/>
+ 
+@@ -1125,7 +1184,7 @@
+         <include name="**/*.py"/>
+       </fileset>
+     </setpermissions>
+-
++-->
+     <!-- publish some useful stylesheets -->
+     <copy todir="${dist.etc}">
+       <fileset dir="${etc.dir}">
+@@ -1142,9 +1201,11 @@
+         <include name="log.xsl"/>
+         <include name="tagdiff.xsl"/>
+       </fileset>
++<!--
+       <fileset dir="${build.lib}">
+         <include name="${bootstrap.jar}"/>
+       </fileset>
++-->
+     </copy>
+   </target>
+ 
+@@ -1154,7 +1215,7 @@
+        ===================================================================
+   -->
+   <target name="bootstrap" description="--> creates a bootstrap build">
+-    <antcall inheritAll="false" target="dist-lite">
++    <antcall inheritAll="false" target="dist-bootstrap">
+       <param name="dist.dir" value="${bootstrap.dir}"/>
+     </antcall>
+   </target>
+@@ -1589,7 +1650,7 @@
+          Compile testcases
+        ===================================================================
+   -->
+-  <target name="compile-tests" depends="build" if="junit.present">
++  <target name="compile-tests" depends="prepare" if="junit.present">
+     <mkdir dir="${build.tests}"/>
+ 
+     <javac srcdir="${src.junit}"

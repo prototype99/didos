@@ -1,17 +1,15 @@
-diff --git a/src/script/ant b/src/script/ant
-index 81107b5..a501081 100644
---- a/src/script/ant
-+++ b/src/script/ant
+--- a/src/script/ant 2019-09-01 07:14:10.000000000 +0100
++++ b/src/script/ant 2019-12-10 20:16:12.907736582 +0000
 @@ -1,4 +1,4 @@
 -#! /bin/sh
 +#!@GENTOO_PORTAGE_EPREFIX@/bin/bash
- 
+
  # Licensed to the Apache Software Foundation (ASF) under one or more
  # contributor license agreements.  See the NOTICE file distributed with
 @@ -15,6 +15,10 @@
  # See the License for the specific language governing permissions and
  # limitations under the License.
- 
+
 +#   Edited for Gentoo Linux
 +
 +EPREFIX="@GENTOO_PORTAGE_EPREFIX@"
@@ -19,7 +17,7 @@ index 81107b5..a501081 100644
  # Extract launch and ant arguments, (see details below).
  ant_exec_args=
  no_config=false
-@@ -83,9 +87,9 @@ if $no_config; then
+@@ -83,9 +87,9 @@
    usejikes=$use_jikes_default
  else
    # load system-wide ant configuration (ONLY if ANT_HOME has NOT been set)
@@ -31,11 +29,11 @@ index 81107b5..a501081 100644
 +      . "${EPREFIX}"/etc/ant.conf
      fi
    fi
- 
-@@ -106,69 +110,23 @@ else
+
+@@ -106,69 +110,23 @@
    fi
  fi
- 
+
 -# Setup Java environment in rpm mode
 -if $rpm_mode; then
 -  if [ -f /usr/share/java-utils/java-functions ]; then
@@ -44,7 +42,8 @@ index 81107b5..a501081 100644
 -    set_javacmd
 -  fi
 -fi
--
++export WANT_JAVA_CONFIG=2
+
 -# OS specific support.  $var _must_ be set to either true or false.
 -cygwin=false;
 -darwin=false;
@@ -85,16 +84,15 @@ index 81107b5..a501081 100644
 -  done
 -
 -  ANT_HOME=`dirname "$PRG"`/..
-+export WANT_JAVA_CONFIG=2
- 
+-
 -  # make it fully qualified
 -  ANT_HOME=`cd "$ANT_HOME" > /dev/null && pwd`
 +# Always get JAVA_HOME from java-config, unless ANT_RESPECT_JAVA_HOME is set
 +# Use GENTOO_VM to change which VM is used instead.
 +if [[ -z "${ANT_RESPECT_JAVA_HOME}" || -z "${JAVA_HOME}" ]]; then
-+	export JAVA_HOME="$(java-config -g JAVA_HOME)"
++ export JAVA_HOME="$(java-config -g JAVA_HOME)"
  fi
- 
+
 -# For Cygwin and Mingw, ensure paths are in UNIX format before
 -# anything is touched
 -if $cygwin; then
@@ -111,12 +109,12 @@ index 81107b5..a501081 100644
 -  [ -n "$JAVA_HOME" ] && JAVA_HOME="`(cd "$JAVA_HOME"; pwd)`"
 +
 +if [[ -z "${ANT_HOME}" ]] ; then
-+	ANT_HOME="${EPREFIX}"/usr/share/ant
++ ANT_HOME="${EPREFIX}"/usr/share/ant
  fi
- 
+
  # set ANT_LIB location
-@@ -176,14 +134,7 @@ ANT_LIB="${ANT_HOME}/lib"
- 
+@@ -176,14 +134,7 @@
+
  if [ -z "$JAVACMD" ]; then
    if [ -n "$JAVA_HOME" ]; then
 -    # IBM's JDK on AIX uses strange locations for the executables
@@ -130,10 +128,10 @@ index 81107b5..a501081 100644
    else
      JAVACMD=`which java 2> /dev/null `
      if [ -z "$JAVACMD" ]; then
-@@ -200,88 +151,61 @@ if [ ! -x "$JAVACMD" ]; then
+@@ -200,88 +151,56 @@
    exit 1
  fi
- 
+
 -# Build local classpath using just the launcher in non-rpm mode or
 -# use the Jpackage helper in rpm mode with basic and default jars
 -# specified in the ant.conf configuration. Because the launcher is
@@ -160,7 +158,12 @@ index 81107b5..a501081 100644
 -      fi
 -    done
 -  fi
--
++if [ -z "$LOCALCLASSPATH" ] ; then
++  LOCALCLASSPATH=$ANT_LIB/ant-launcher.jar
++else
++  LOCALCLASSPATH=$ANT_LIB/ant-launcher.jar:$LOCALCLASSPATH
++fi
+
 -  # If the user requested to try to add some other jars to the classpath
 -  if [ -n "$OPT_JAR_LIST" ]; then
 -    _OPTCLASSPATH="$(/usr/bin/build-classpath $OPT_JAR_LIST 2> /dev/null)"
@@ -168,7 +171,9 @@ index 81107b5..a501081 100644
 -      LOCALCLASSPATH="$LOCALCLASSPATH:$_OPTCLASSPATH"
 -    fi
 -  fi
--
++# if ANT_TASKS is not set, default to "all"
++ANT_TASKS="${ANT_TASKS:-all}"
+
 -  # Explicitly add javac path to classpath, assume JAVA_HOME set
 -  # properly in rpm mode
 -  if [ -f "$JAVA_HOME/lib/tools.jar" ]; then
@@ -177,28 +182,19 @@ index 81107b5..a501081 100644
 -  if [ -f "$JAVA_HOME/lib/classes.zip" ]; then
 -    LOCALCLASSPATH="$LOCALCLASSPATH:$JAVA_HOME/lib/classes.zip"
 -  fi
-+if [ -z "$LOCALCLASSPATH" ] ; then
-+  LOCALCLASSPATH=$ANT_LIB/ant-launcher.jar
-+else
-+  LOCALCLASSPATH=$ANT_LIB/ant-launcher.jar:$LOCALCLASSPATH
-+fi
-+
-+# if ANT_TASKS is not set, default to "all"
-+ANT_TASKS="${ANT_TASKS:-all}"
-+
 +# if ANT_TASKS is set to "all", get the tasks list from /usr/share/ant/tasks/
 +if [[ "${ANT_TASKS}" == "all" ]]; then
-+	ANT_TASKS=""
-+	# but only if it exists
-+	if [[ -d "${EPREFIX}"/usr/share/ant/tasks ]]; then
-+		ANT_TASKS="${ANT_TASKS} ${EPREFIX}"/usr/share/ant/tasks/*
-+	fi
-+	if [[ -d "${EPREFIX}"/usr/share/ant/tasks-1.8.2 ]]; then
-+		ANT_TASKS="${ANT_TASKS} ${EPREFIX}"/usr/share/ant/tasks-1.8.2/*
-+	fi
++ ANT_TASKS=""
++ # but only if it exists
++ if [[ -d "${EPREFIX}"/usr/share/ant/tasks ]]; then
++   ANT_TASKS="${ANT_TASKS} ${EPREFIX}"/usr/share/ant/tasks/*
++ fi
++ if [[ -d "${EPREFIX}"/usr/share/ant/tasks-1.8.2 ]]; then
++   ANT_TASKS="${ANT_TASKS} ${EPREFIX}"/usr/share/ant/tasks-1.8.2/*
++ fi
 +# if set to "none", make ANT_TASKS empty list
 +elif [[ "${ANT_TASKS}" == "none" ]]; then
-+	ANT_TASKS=""
++ ANT_TASKS=""
 +fi
 +# otherwise ANT_TASKS defines explicit task list
 +
@@ -208,7 +204,7 @@ index 81107b5..a501081 100644
 +  TASKS_LIST="${TASKS_LIST},$(basename $task)"
 +done
 +TASKS_LIST=${TASKS_LIST#,}
- 
+
 -  # if CLASSPATH_OVERRIDE env var is set, LOCALCLASSPATH will be
 -  # user CLASSPATH first and ant-found jars after.
 -  # In that case, the user CLASSPATH will override ant-found jars
@@ -232,13 +228,13 @@ index 81107b5..a501081 100644
 +  ANT_TASKS_CLASSPATH=""
 +  ANT_TASKS_LIBPATH=""
 +fi
- 
+
 -    # remove class path from launcher -cp option
 -    CLASSPATH=""
 -  fi
 +# determine where to get tools.jar from
 +if [[ -n "${ANT_RESPECT_JAVA_HOME}" ]]; then
-+	TOOLS_JAR="${JAVA_HOME}/lib/tools.jar"
++ TOOLS_JAR="${JAVA_HOME}/lib/tools.jar"
  else
 -  # not using rpm_mode; use launcher to determine classpaths
 -  if [ -z "$LOCALCLASSPATH" ]; then
@@ -246,9 +242,9 @@ index 81107b5..a501081 100644
 -  else
 -    LOCALCLASSPATH=$ANT_LIB/ant-launcher.jar:$LOCALCLASSPATH
 -  fi
-+	TOOLS_JAR="$(java-config --tools)"
++ TOOLS_JAR="$(java-config --tools)"
  fi
- 
+
 -if [ -n "$JAVA_HOME" ]; then
 -  # OSX hack to make Ant work with jikes
 -  if $darwin; then
@@ -261,18 +257,13 @@ index 81107b5..a501081 100644
 -  fi
 +if [[ -n "${TOOLS_JAR}" ]] ; then
 +  LOCALCLASSPATH="$LOCALCLASSPATH:${TOOLS_JAR}"
-+elif [[ $(java-config -f) != apple-jdk-bin* ]] ; then
-+  echo "Warning: Unable to determine tools.jar location."
-+  echo "  If build fails because sun.* classes could not be found,"
-+  echo "  Make sure you are using a JDK, not JRE as your user/system VM."
-+  echo "  and that you have java-config version 2.0.30 or above installed."
  fi
- 
+
  # Allow Jikes support (off by default)
-@@ -289,29 +213,6 @@ if $usejikes; then
+@@ -289,29 +208,6 @@
    ANT_OPTS="$ANT_OPTS -Dbuild.compiler=jikes"
  fi
- 
+
 -# For Cygwin, switch paths to appropriate format before running java
 -# For PATHs convert to unix format first, then to windows format to ensure
 -# both formats are supported. Probably this will fail on directories with ;
@@ -299,7 +290,7 @@ index 81107b5..a501081 100644
  # Show script help if requested
  if $show_help; then
    echo $0 '[script options] [options] [target [target2 [target3] ..]]'
-@@ -326,49 +227,20 @@ if $show_help; then
+@@ -326,49 +222,20 @@
    echo '                         launch script'
    echo ''
  fi
@@ -347,14 +338,14 @@ index 81107b5..a501081 100644
 -  fi
 +
 +if [ -n "$JIKESPATH" ]; then
-+	ant_sys_opts="-Djikes.class.path=\"$JIKESPATH\""
++ ant_sys_opts="-Djikes.class.path=\"$JIKESPATH\""
  fi
 -ant_exec_command="exec \"\$JAVACMD\" $ANT_OPTS -classpath \"\$LOCALCLASSPATH\" -Dant.home=\"\$ANT_HOME\" -Dant.library.dir=\"\$ANT_LIB\" $ant_sys_opts org.apache.tools.ant.launch.Launcher $ANT_ARGS -cp \"\$CLASSPATH\""
 +
 +ant_exec_command="exec \"${JAVACMD}\" ${ANT_OPTS} -classpath \"${LOCALCLASSPATH}\" \
-+	-Dant.home=\"${ANT_HOME}\" -Dant.library.dir=\"${ANT_LIB}\" ${ant_sys_opts} \
-+	${ANT_TASKS_LIBPATH} org.apache.tools.ant.launch.Launcher \
-+	${ANT_TASKS_CLASSPATH} ${ANT_ARGS} -cp \"${CLASSPATH}\""
++ -Dant.home=\"${ANT_HOME}\" -Dant.library.dir=\"${ANT_LIB}\" ${ant_sys_opts} \
++ ${ANT_TASKS_LIBPATH} org.apache.tools.ant.launch.Launcher \
++ ${ANT_TASKS_CLASSPATH} ${ANT_ARGS} -cp \"${CLASSPATH}\""
 +
  if $ant_exec_debug; then
    # using printf to avoid echo line continuation and escape interpretation confusion

@@ -16,8 +16,7 @@ MY_P="apache-ant-${PV}"
 
 DESCRIPTION="Java-based build tool similar to 'make' that uses XML configuration files"
 HOMEPAGE="https://ant.apache.org/"
-SRC_URI="https://archive.apache.org/dist/ant/source/${MY_P}-src.tar.bz2
-	https://dev.gentoo.org/~fordfrog/distfiles/ant-${PV}-gentoo.tar.bz2"
+SRC_URI="https://archive.apache.org/dist/ant/source/${MY_P}-src.tar.bz2"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -31,7 +30,7 @@ S="${WORKDIR}/${MY_P}"
 
 RESTRICT="test"
 
-PATCHES=( "${WORKDIR}/${PV}-build.patch" "${FILESDIR}/${PV}-launch.patch" )
+PATCHES=( "${WORKDIR}/${PV}-build.patch" "${FILESDIR}/${PV}-launch-alt.patch" )
 
 src_prepare() {
 	default
