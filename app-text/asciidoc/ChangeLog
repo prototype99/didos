@@ -1,0 +1,9 @@
+*asciidoc-9.0.0_rc1-r1
+::prototype99
+-improve python use flags
+
+*asciidoc-9.0.0_rc1
+::pg_overlay
+-base ebuild
+::prototype99
+-remove python usedep
