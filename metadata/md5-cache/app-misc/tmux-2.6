@@ -1,0 +1,15 @@
+DEFINED_PHASES=configure install prepare unpack
+DEPEND=sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71-r5 >=sys-devel/libtool-2.4.7 dev-libs/libevent:0= >=dev-libs/libevent-2.1.5-r4 utempter? ( sys-libs/libutempter ) utf8proc? ( dev-libs/utf8proc ) sys-libs/ncurses:0= virtual/pkgconfig
+DESCRIPTION=Terminal multiplexer
+EAPI=6
+HOMEPAGE=https://tmux.github.io/ https://github.com/tmux/tmux
+INHERIT=rindeal git-hosting autotools arrays
+IUSE=debug selinux utempter utf8proc static
+KEYWORDS=~amd64 ~arm ~arm64
+LICENSE=ISC
+RDEPEND=dev-libs/libevent:0= >=dev-libs/libevent-2.1.5-r4 utempter? ( sys-libs/libutempter ) utf8proc? ( dev-libs/utf8proc ) sys-libs/ncurses:0= dev-libs/libevent:= selinux? ( sec-policy/selinux-screen )
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/tmux/tmux/archive/2.6.tar.gz -> github--tmux--tmux--2.6.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-hosting	84f64c6eacd2317de2a33945695bb4ac	eqawarn	c9847c43b3253a276ae2eabddedab3d7	gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	libtool	9d3a9a889a6fa62ae794f817c156491b	autotools	b5529dc611971a61a30153916014f616	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=3bd1b7b865a28d9abda9351d08e60266

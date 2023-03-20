@@ -1,0 +1,15 @@
+DEFINED_PHASES=configure install prepare setup unpack
+DEPEND=sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71-r5 >=sys-devel/libtool-2.4.7 virtual/pkgconfig virtual/pkgconfig
+DESCRIPTION=An interface for filesystems implemented in userspace
+EAPI=6
+HOMEPAGE=https://github.com/libfuse/libfuse
+INHERIT=rindeal linux-info git-hosting autotools ltprune udev arrays
+IUSE=examples static-libs
+KEYWORDS=~amd64 ~arm ~arm64
+LICENSE=GPL-2
+RDEPEND=sys-fs/fuse-common
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/libfuse/libfuse/archive/fuse-2.9.7.tar.gz -> github--libfuse--libfuse--fuse-2.9.7.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	eapi7-ver	1a0a60ad07c8b32d2faba2d085dc0f24	linux-info	ecb03306c95c6ccc55852c98abcfcc64	git-hosting	84f64c6eacd2317de2a33945695bb4ac	eqawarn	c9847c43b3253a276ae2eabddedab3d7	gnuconfig	b6b3e92f8b8c996400074b5f61a59256	libtool	9d3a9a889a6fa62ae794f817c156491b	autotools	b5529dc611971a61a30153916014f616	ltprune	97143780d341cc8d8f1d4c6187a36d29	udev	eec0bbab06977f1cfc5597269c1fa152	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=b3e4b8fecb2ed1e60bf39380cffed497

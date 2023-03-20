@@ -1,0 +1,15 @@
+DEFINED_PHASES=configure install prepare setup
+DEPEND=virtual/pkgconfig >=app-portage/elt-patches-20170815 !sys-fs/ntfsprogs crypto? ( >=dev-libs/libgcrypt-1.2.2:0 >=net-libs/gnutls-1.4.4 ) external-fuse? ( >=sys-fs/fuse-2.8.0:0 ) sys-apps/attr virtual/pkgconfig
+DESCRIPTION=Open source read/write NTFS driver for FUSE
+EAPI=6
+HOMEPAGE=https://www.tuxera.com/community/ntfs-3g-download/
+INHERIT=rindeal ltprune linux-info udev toolchain-funcs libtool arrays
+IUSE=acl +external-fuse suid xattr debug ldscript pedantic really-static static-libs uuid hd +ntfs-3g +ntfsprogs +mount-helper library crypto extras mtab +device-default-io-ops quarantined
+KEYWORDS=amd64 arm arm64
+LICENSE=GPL-2
+RDEPEND=!sys-fs/ntfsprogs crypto? ( >=dev-libs/libgcrypt-1.2.2:0 >=net-libs/gnutls-1.4.4 ) external-fuse? ( >=sys-fs/fuse-2.8.0:0 )
+REQUIRED_USE=ntfsprogs? ( device-default-io-ops )
+SLOT=0/88
+SRC_URI=https://tuxera.com/opensource/ntfs-3g_ntfsprogs-2017.3.23.tgz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	ltprune	97143780d341cc8d8f1d4c6187a36d29	eapi7-ver	1a0a60ad07c8b32d2faba2d085dc0f24	linux-info	ecb03306c95c6ccc55852c98abcfcc64	udev	eec0bbab06977f1cfc5597269c1fa152	libtool	9d3a9a889a6fa62ae794f817c156491b	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=99ebd1ac22cf079b46385caf99dd44a7

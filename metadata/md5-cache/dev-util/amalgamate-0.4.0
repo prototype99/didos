@@ -1,0 +1,12 @@
+DEFINED_PHASES=install unpack
+DESCRIPTION=Tool for creating an amalgamation from C and C++ sources
+EAPI=7
+HOMEPAGE=https://github.com/rindeal/Amalgamate
+INHERIT=rindeal git-hosting
+KEYWORDS=amd64 arm arm64
+LICENSE=MIT
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/rindeal/Amalgamate/archive/0.4.0.tar.gz -> github--rindeal--Amalgamate--0.4.0.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-hosting	84f64c6eacd2317de2a33945695bb4ac
+_md5_=2aceedca01f535e4c4fa4c2f14108cae

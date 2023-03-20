@@ -1,0 +1,17 @@
+BDEPEND=>=dev-util/meson-0.62.2 >=dev-util/ninja-1.8.2 dev-util/meson-format-array filecaps? ( sys-libs/libcap ) virtual/pkgconfig
+DEFINED_PHASES=compile configure install postinst prepare test unpack
+DEPEND=!static? ( caps? ( sys-libs/libcap ) idn? ( net-dns/libidn2:0 ) ipv6? ( crypto? ( crypto_gcrypt? ( dev-libs/libgcrypt:0= ) crypto_nettle? ( dev-libs/nettle ) crypto_openssl? ( dev-libs/openssl:0 ) ) ) nls? ( sys-devel/gettext ) ) static? ( caps? ( sys-libs/libcap[static-libs(+)] ) idn? ( net-dns/libidn2:0[static-libs(+)] ) ipv6? ( crypto? ( crypto_gcrypt? ( dev-libs/libgcrypt:0=[static-libs(+)] ) crypto_nettle? ( dev-libs/nettle[static-libs(+)] ) crypto_openssl? ( dev-libs/openssl:0[static-libs(+)] ) ) ) nls? ( sys-devel/gettext[static-libs(+)] ) ) crypto_kernel? ( virtual/os-headers ) html? ( dev-libs/libxslt app-text/docbook-xsl-ns-stylesheets ) man? ( dev-libs/libxslt app-text/docbook-xsl-ns-stylesheets )
+DESCRIPTION=Network monitoring tools including ping and ping6
+EAPI=7
+HOMEPAGE=https://wiki.linuxfoundation.org/networking/iputils https://github.com/iputils/iputils
+INHERIT=rindeal dsf-utils rindeal-utils git-hosting flag-o-matic meson fcaps systemd arrays
+IUSE=+filecaps html man caps idn ipv6 static nls +arping clockdiff +ping ninfod rarpd rdisc tftpd +tracepath traceroute6 ninfod-messages rdisc-server crypto crypto_gcrypt crypto_nettle +crypto_openssl crypto_kernel
+KEYWORDS=~amd64 ~arm ~arm64
+LICENSE=BSD GPL-2+ rdisc
+RDEPEND=filecaps? ( sys-libs/libcap ) !static? ( caps? ( sys-libs/libcap ) idn? ( net-dns/libidn2:0 ) ipv6? ( crypto? ( crypto_gcrypt? ( dev-libs/libgcrypt:0= ) crypto_nettle? ( dev-libs/nettle ) crypto_openssl? ( dev-libs/openssl:0 ) ) ) nls? ( sys-devel/gettext ) ) arping? ( !net-misc/arping ) rarpd? ( !net-misc/rarpd ) traceroute6? ( !net-analyzer/traceroute )
+REQUIRED_USE=ipv6? ( crypto? ( ^^ ( crypto_gcrypt crypto_nettle crypto_openssl crypto_kernel ) ) ) traceroute6? ( ipv6 ) ninfod? ( crypto )
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/iputils/iputils/archive/s20190709.tar.gz -> github--iputils--iputils--s20190709.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	dsf-utils	a18b968afe2aa16f9269a3faf0661c39	rindeal-utils	cdb632f76ffbf3d8d0da091e2809d0e0	git-hosting	84f64c6eacd2317de2a33945695bb4ac	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	edos2unix	33e347e171066657f91f8b0c72ec8773	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4a1902f969e5718126434fc35f3a0d9c	eutils	8f942ebdcf04334697649d4a0bf65a32	flag-o-matic	69394e25812406faa1f90edaf4969395	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	38c85b725d0467e51954ea921b6c104b	eapi8-dosym	741bfa77afb2a9321261501aca58c208	python-utils-r1	429bfd4e8d8e39db5385ba5744f30788	meson	cd2865332c8d99e1da0655523ff4a28f	fcaps	c0a086b957a1b183a8d136eabf02f191	systemd	5f4bb0758df2e483babf68cd517078ca	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=12988b1654833fe4f3777961ef10739a

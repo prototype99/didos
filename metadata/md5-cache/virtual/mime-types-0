@@ -1,0 +1,9 @@
+DEFINED_PHASES=-
+DESCRIPTION=Provides /etc/mime.types file
+EAPI=6
+IUSE=gentoo +mailcap
+KEYWORDS=amd64
+RDEPEND=gentoo? ( app-misc/mime-types ) mailcap? ( app-misc/mime-types-mailcap )
+REQUIRED_USE=^^ ( gentoo mailcap )
+SLOT=0
+_md5_=940659f93d3b500944de0b5487121c3f

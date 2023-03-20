@@ -1,0 +1,15 @@
+DEFINED_PHASES=compile install postinst postrm preinst prepare unpack
+DEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+DESCRIPTION=A complete toolset for C and C++ development
+EAPI=7
+HOMEPAGE=https://www.jetbrains.com/clion
+INHERIT=rindeal jetbrains-intellij
+IUSE=custom-jdk +python +system-clang +system-cmake +system-gdb +system-lldb system-jre
+KEYWORDS=~amd64 ~arm ~x86
+LICENSE=|| ( IDEA IDEA_Academic IDEA_Classroom IDEA_OpenSource IDEA_Personal ) Apache-1.1 Apache-2.0 BSD BSD-2 CC0-1.0 CDDL-1.1 CPL-0.5 CPL-1.0 EPL-1.0 EPL-2.0 GPL-2 GPL-2-with-classpath-exception GPL-3 ISC JDOM LGPL-2.1+ LGPL-3 MIT MPL-1.0 MPL-1.1 OFL public-domain PSF-2 UoI-NCSA ZLIB
+RDEPEND=dev-libs/libdbusmenu system-clang? ( sys-devel/clang ) system-cmake? ( >=dev-util/cmake-3.14.3 ) system-gdb? ( >=sys-devel/gdb-8.2 ) system-lldb? ( >=dev-util/lldb-7.0.1 ) system-jre? ( >=virtual/jre-1.8 )
+RESTRICT=mirror strip test
+SLOT=2020.2
+SRC_URI=https://download.jetbrains.com/cpp/CLion-2020.2.4.tar.gz -> clion-2020.2.4.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	xdg-utils	ac0e315a3688929e34ac75b139e7349a	xdg	4a14c5c24f121e7da66e5aab4a168c6e	desktop	021728fdc1b03b36357dbc89489e0f0d	estack	055c42df72f76a4f45ec92b35e83cd56	jetbrains-intellij	c9335417d17169c85923bb1c86f3ada0
+_md5_=99b494fdf01f61d55e445eed79b2f2a3

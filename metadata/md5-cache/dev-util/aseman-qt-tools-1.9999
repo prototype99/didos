@@ -1,0 +1,15 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile configure install prepare unpack
+DEPEND=dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtnetwork:5 dev-qt/qtwidgets:5 dev-qt/qtdeclarative:5 dbus? ( dev-qt/qtdbus:5 ) keychain? ( dev-libs/qtkeychain ) multimedia? ( dev-qt/qtmultimedia:5 ) positioning? ( dev-qt/qtpositioning:5 ) sensors? ( dev-qt/qtsensors:5 ) webenginewidgets? ( dev-qt/qtwebengine:5 ) webkitwidgets? ( dev-qt/qtwebkit:5 ) virtual/pkgconfig
+DESCRIPTION=Set of tools to support cross platform Qt projects by Aseman
+EAPI=7
+HOMEPAGE=https://github.com/Aseman-Land/aseman-qt-tools
+INHERIT=rindeal git-hosting qmake-utils arrays
+IUSE=+keychain sensors +widgets +multimedia webkitwidgets webenginewidgets +positioning +dbus
+LICENSE=GPL-3
+PROPERTIES=live
+RDEPEND=dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtnetwork:5 dev-qt/qtwidgets:5 dev-qt/qtdeclarative:5 dbus? ( dev-qt/qtdbus:5 ) keychain? ( dev-libs/qtkeychain ) multimedia? ( dev-qt/qtmultimedia:5 ) positioning? ( dev-qt/qtpositioning:5 ) sensors? ( dev-qt/qtsensors:5 ) webenginewidgets? ( dev-qt/qtwebengine:5 ) webkitwidgets? ( dev-qt/qtwebkit:5 )
+RESTRICT=mirror primaryuri
+SLOT=0
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-r3	c57c50c922e121043788de0b40ada60a	git-hosting	84f64c6eacd2317de2a33945695bb4ac	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	qmake-utils	59420c906278d16deaaa629f9d115707	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=2f34c9942e3732171d4f6a120fb16575

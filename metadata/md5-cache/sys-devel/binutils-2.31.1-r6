@@ -3,12 +3,13 @@ DEPEND=>=sys-devel/binutils-config-3 sys-libs/zlib doc? ( sys-apps/texinfo ) tes
 DESCRIPTION=Tools necessary to build programs
 EAPI=6
 HOMEPAGE=https://sourceware.org/binutils/
+INHERIT=eutils libtool flag-o-matic gnuconfig multilib eapi7-ver
 IUSE=+cxx default-gold doc +gold multitarget +nls +plugins static-libs test
-KEYWORDS=~alpha amd64 arm arm64 ~hppa ~ia64 m68k ~mips s390 sh ~sparc x86 ~amd64-fbsd ~x86-fbsd
+KEYWORDS=~alpha amd64 arm arm64 ~hppa ~ia64 m68k ~mips s390 sh ~sparc x86
 LICENSE=GPL-3+
 RDEPEND=>=sys-devel/binutils-config-3 sys-libs/zlib
 REQUIRED_USE=cxx? ( gold plugins ) default-gold? ( gold )
 SLOT=2.31
 SRC_URI=mirror://gnu/binutils/binutils-2.31.1.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.31.1-patches-7.tar.xz
-_eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	epatch	a1bf4756dba418a7238f3be0cb010c54	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	gnuconfig	b8ec1c34be4ff9dac7ad4034d277936b	libtool	f143db5a74ccd9ca28c1234deffede96	ltprune	2729691420b6deeda2a90b1f1183fb55	multilib	1d91b03d42ab6308b5f4f6b598ed110e	preserve-libs	ef207dc62baddfddfd39a164d9797648	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529	vcs-clean	2a0f74a496fa2b1552c4f3398258b7bf
-_md5_=a8b820c92f50aee029e3683f718d3a2e
+_eclasses_=desktop	021728fdc1b03b36357dbc89489e0f0d	edos2unix	33e347e171066657f91f8b0c72ec8773	estack	055c42df72f76a4f45ec92b35e83cd56	epatch	447396341f5f896d722e435a06f87a4f	eqawarn	c9847c43b3253a276ae2eabddedab3d7	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	ltprune	97143780d341cc8d8f1d4c6187a36d29	preserve-libs	a8e50acee31b5759b4df1f7707cae54b	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	vcs-clean	d271b7bc7e6a009758d7d4ef749174e3	wrapper	4a1902f969e5718126434fc35f3a0d9c	eutils	8f942ebdcf04334697649d4a0bf65a32	libtool	9d3a9a889a6fa62ae794f817c156491b	flag-o-matic	69394e25812406faa1f90edaf4969395	gnuconfig	b6b3e92f8b8c996400074b5f61a59256	eapi7-ver	1a0a60ad07c8b32d2faba2d085dc0f24
+_md5_=ffd47fd3251820d34723bab853059a37

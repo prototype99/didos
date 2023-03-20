@@ -1,0 +1,17 @@
+BDEPEND=>=dev-util/meson-0.62.2 >=dev-util/ninja-1.8.2 dev-util/meson-format-array
+DEFINED_PHASES=compile configure install test unpack
+DEPEND=
+DESCRIPTION=Reusable library for GPU-accelerated video/image rendering primitives
+EAPI=7
+HOMEPAGE=https://github.com/haasn/libplacebo
+INHERIT=rindeal git-hosting meson arrays
+IUSE=vulkan test bench
+KEYWORDS=~amd64 ~arm ~arm64
+LICENSE=LGPL-2.1+
+RDEPEND=
+REQUIRED_USE=
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/haasn/libplacebo/archive/v1.18.0.tar.gz -> github--haasn--libplacebo--v1.18.0.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-hosting	84f64c6eacd2317de2a33945695bb4ac	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	38c85b725d0467e51954ea921b6c104b	eapi8-dosym	741bfa77afb2a9321261501aca58c208	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	python-utils-r1	429bfd4e8d8e39db5385ba5744f30788	meson	cd2865332c8d99e1da0655523ff4a28f	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=ae7039e997c9c8c218469c3b308ca204

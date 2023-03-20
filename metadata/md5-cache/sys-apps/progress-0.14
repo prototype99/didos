@@ -1,0 +1,14 @@
+DEFINED_PHASES=setup unpack
+DEPEND=sys-libs/ncurses:0= virtual/pkgconfig
+DESCRIPTION=Linux tool to show progress for cp, mv, dd, and virtually any command
+EAPI=6
+HOMEPAGE=https://github.com/Xfennec/progress
+INHERIT=rindeal git-hosting arrays
+KEYWORDS=amd64 arm arm64
+LICENSE=GPL-3
+RDEPEND=sys-libs/ncurses:0=
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/Xfennec/progress/archive/v0.14.tar.gz -> github--Xfennec--progress--v0.14.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-hosting	84f64c6eacd2317de2a33945695bb4ac	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=99ca4bd512daed70228b880fb04580fd

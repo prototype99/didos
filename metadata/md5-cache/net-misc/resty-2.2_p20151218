@@ -1,0 +1,12 @@
+DEFINED_PHASES=install unpack
+DESCRIPTION=Little command line REST client that you can use in pipelines (bash or zsh)
+EAPI=6
+HOMEPAGE=https://github.com/micha/resty
+INHERIT=rindeal git-hosting
+KEYWORDS=~amd64 ~arm ~arm64
+LICENSE=MIT
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/micha/resty/archive/82d9cbd2776acd3f4c103d5fe00c74232648fee3.tar.gz -> github--micha--resty--82d9cbd2776acd3f4c103d5fe00c74232648fee3.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-hosting	84f64c6eacd2317de2a33945695bb4ac
+_md5_=518a9928f7b487ce426487eab99fefc9

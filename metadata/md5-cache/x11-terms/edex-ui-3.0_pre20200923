@@ -1,0 +1,11 @@
+DEFINED_PHASES=compile install
+DEPEND=net-libs/nodejs[npm]
+DESCRIPTION=A cross-platform, customizable science fiction terminal emulator with advanced monitoring & touchscreen support.
+EAPI=7
+HOMEPAGE=https://github.com/GitSquared/edex-ui/
+KEYWORDS=amd64
+LICENSE=GPL-3
+RESTRICT=network-sandbox
+SLOT=0
+SRC_URI=https://github.com/GitSquared/edex-ui/archive/b4456a650d13a441c8c957279a0b62ad0f90d5f4.zip -> edex-ui-3.0_pre20200923.zip
+_md5_=c64853ac5dbd8e4822b977fd7a8ae14f

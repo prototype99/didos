@@ -1,0 +1,14 @@
+DEFINED_PHASES=install prepare
+DEPEND=sys-libs/glibc sys-apps/dbus x11-libs/libX11 x11-libs/libXau x11-libs/libXdmcp x11-libs/libXext x11-libs/libXinerama dev-libs/libgcrypt dev-libs/libgpg-error dev-libs/openssl dev-libs/boost media-libs/freetype media-libs/libogg media-libs/libsdl media-libs/libvorbis media-libs/gstreamer media-libs/openal media-plugins/gst-plugins-meta net-libs/gnutls net-misc/curl net-dns/c-ares sys-libs/zlib virtual/glu virtual/opengl app-admin/chrpath
+DESCRIPTION=An open source metaverse viewer
+EAPI=7
+HOMEPAGE=http://www.firestormviewer.org/
+INHERIT=eutils desktop
+KEYWORDS=~amd64 -*
+LICENSE=GPL-2-with-Linden-Lab-FLOSS-exception
+RDEPEND=sys-libs/glibc sys-apps/dbus x11-libs/libX11 x11-libs/libXau x11-libs/libXdmcp x11-libs/libXext x11-libs/libXinerama dev-libs/libgcrypt dev-libs/libgpg-error dev-libs/openssl dev-libs/boost media-libs/freetype media-libs/libogg media-libs/libsdl media-libs/libvorbis media-libs/gstreamer media-libs/openal media-plugins/gst-plugins-meta net-libs/gnutls net-misc/curl net-dns/c-ares sys-libs/zlib virtual/glu virtual/opengl
+RESTRICT=mirror
+SLOT=0
+SRC_URI=http://downloads.firestormviewer.org/linux/Phoenix_Firestorm-Releasex64_x86_64_6.3.2.58052.tar.xz
+_eclasses_=edos2unix	33e347e171066657f91f8b0c72ec8773	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4a1902f969e5718126434fc35f3a0d9c	eutils	8f942ebdcf04334697649d4a0bf65a32	desktop	021728fdc1b03b36357dbc89489e0f0d
+_md5_=4a089d5b6f4b8e2e5d33c13874cd15fc

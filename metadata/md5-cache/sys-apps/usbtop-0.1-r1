@@ -1,0 +1,17 @@
+BDEPEND=>=dev-util/ninja-1.8.2 >=dev-util/cmake-3.20.5
+DEFINED_PHASES=compile configure install prepare setup test unpack
+DEPEND=net-libs/libpcap dev-libs/boost[threads]
+DESCRIPTION=utility that shows an estimated instantaneous bandwidth on USB buses and devices
+EAPI=7
+HOMEPAGE=https://github.com/aguinet/usbtop
+INHERIT=rindeal linux-info git-hosting cmake arrays
+IUSE=doc
+KEYWORDS=~amd64 ~arm ~arm64
+LICENSE=BSD
+RDEPEND=net-libs/libpcap dev-libs/boost[threads]
+REQUIRED_USE=
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/aguinet/usbtop/archive/release-0.1.tar.gz -> github--aguinet--usbtop--release-0.1.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	linux-info	ecb03306c95c6ccc55852c98abcfcc64	git-hosting	84f64c6eacd2317de2a33945695bb4ac	edos2unix	33e347e171066657f91f8b0c72ec8773	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4a1902f969e5718126434fc35f3a0d9c	eutils	8f942ebdcf04334697649d4a0bf65a32	flag-o-matic	69394e25812406faa1f90edaf4969395	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	38c85b725d0467e51954ea921b6c104b	xdg-utils	ac0e315a3688929e34ac75b139e7349a	cmake	2e47edc2986d4e1c0363867058cd4489	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=213b937da3073b5bd487d13b72e776a6

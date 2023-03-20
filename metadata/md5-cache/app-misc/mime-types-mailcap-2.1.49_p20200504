@@ -1,0 +1,9 @@
+DEFINED_PHASES=install
+DESCRIPTION=Provides /etc/mime.types file
+EAPI=7
+HOMEPAGE=https://pagure.io/fork/petabyteboy/mailcap/
+KEYWORDS=amd64 arm arm64
+LICENSE=public-domain
+SLOT=0
+SRC_URI=https://pagure.io/fork/petabyteboy/mailcap/raw/d2ea7b5ed6dc8e35064d384775ceb89396eabf0a/f/mime.types
+_md5_=67039ca0a3fb125937ae70058a6a477e

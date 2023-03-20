@@ -1,0 +1,16 @@
+DEFINED_PHASES=install unpack
+DEPEND=
+DESCRIPTION=C macros for hash tables and more
+EAPI=7
+HOMEPAGE=https://troydhanson.github.io/uthash/ https://github.com/troydhanson/uthash
+INHERIT=rindeal git-hosting arrays
+IUSE=test
+KEYWORDS=amd64 arm arm64
+LICENSE=BSD-1
+RDEPEND=
+REQUIRED_USE=
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/troydhanson/uthash/archive/v2.1.0.tar.gz -> github--troydhanson--uthash--v2.1.0.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-hosting	84f64c6eacd2317de2a33945695bb4ac	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=9266e06b359600111032b3d034da085f

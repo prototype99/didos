@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm preinst prepare setup test unpack
+DESCRIPTION=Linux kernel fork that includes the pf-kernel patchset and Gentoo's genpatches
+EAPI=7
+HOMEPAGE=https://www.kernel.org/ https://wiki.gentoo.org/wiki/Kernel https://gitlab.com/post-factum/pf-kernel/wikis/README https://dev.gentoo.org/~mpagano/genpatches/
+INHERIT=eutils kernel-2
+IUSE=long-arg symlink build
+KEYWORDS=~amd64 ~ppc ~ppc64 ~x86
+LICENSE=GPL-2
+RDEPEND=!build? ( app-arch/cpio dev-lang/perl sys-devel/bc sys-devel/bison sys-devel/flex sys-devel/make >=sys-libs/ncurses-5.2 virtual/libelf virtual/pkgconfig )
+RESTRICT=binchecks strip
+SLOT=5.3_p4-r1
+SRC_URI=https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.3.tar.xz https://github.com/pfactum/pf-kernel/compare/v5.3...v5.3-pf4.diff -> pf-sources-5.3_p4.patch https://dev.gentoo.org/~mpagano/genpatches/tarballs/genpatches-5.3-1.base.tar.xz https://dev.gentoo.org/~mpagano/genpatches/tarballs/genpatches-5.3-1.extras.tar.xz
+_eclasses_=edos2unix	33e347e171066657f91f8b0c72ec8773	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4a1902f969e5718126434fc35f3a0d9c	eutils	8f942ebdcf04334697649d4a0bf65a32	estack	055c42df72f76a4f45ec92b35e83cd56	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	kernel-2	1e55bee3f3081b16ebc1ca0cf1264f6c
+_md5_=d02a148260a0adc71d2a57579e4bcd37

@@ -1,0 +1,15 @@
+DEFINED_PHASES=configure install prepare unpack
+DEPEND=virtual/pkgconfig sys-apps/help2man media-libs/openal media-libs/alure x11-libs/libX11 x11-libs/libXtst virtual/pkgconfig
+DESCRIPTION=Nostalgia bucklespring keyboard (IBM Model-M) sound emulator
+EAPI=6
+HOMEPAGE=https://github.com/zevv/bucklespring
+INHERIT=rindeal git-hosting toolchain-funcs systemd rindeal-utils help2man arrays
+IUSE=doc
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2
+RDEPEND=media-libs/openal media-libs/alure x11-libs/libX11 x11-libs/libXtst
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/zevv/bucklespring/archive/1.4.0.tar.gz -> github--zevv--bucklespring--1.4.0.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-hosting	84f64c6eacd2317de2a33945695bb4ac	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	systemd	5f4bb0758df2e483babf68cd517078ca	rindeal-utils	cdb632f76ffbf3d8d0da091e2809d0e0	help2man	92366b3c202b9e32f40743ede57e38f4	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=d226b090d6297ce766a79d1f36394924

@@ -1,0 +1,15 @@
+DEFINED_PHASES=install unpack
+DEPEND=media-libs/gd:*
+DESCRIPTION=Weather in your terminal, with ANSI colors and Unicode symbols
+EAPI=7
+HOMEPAGE=https://github.com/fcambus/ansiweather
+INHERIT=rindeal git-hosting arrays
+IUSE=
+KEYWORDS=~amd64 ~arm ~arm64
+LICENSE=BSD
+RDEPEND=media-libs/gd:* app-misc/jq:0 || ( net-misc/wget:0 net-misc/curl:0 ) sys-devel/bc:0
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/fcambus/ansiweather/archive/1.14.0.tar.gz -> github--fcambus--ansiweather--1.14.0.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-hosting	84f64c6eacd2317de2a33945695bb4ac	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=387657bbbc644f2f9f6e62e1b0482633

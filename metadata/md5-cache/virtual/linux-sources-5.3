@@ -1,0 +1,9 @@
+DEFINED_PHASES=-
+DESCRIPTION=Virtual for Linux kernel sources
+EAPI=6
+IUSE=firmware gentoo-sources +pf-sources
+KEYWORDS=~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86
+RDEPEND=firmware? ( sys-kernel/linux-firmware ) || ( gentoo-sources? ( =sys-kernel/gentoo-sources-5.3* ) pf-sources? ( =sys-kernel/pf-sources-5.3* ) || ( =sys-kernel/sabayon-sources-5.3* =sys-kernel/odroid-sources-5.3* =sys-kernel/e-sources-5.3* =sys-kernel/pentoo-sources-5.3* =sys-kernel/backbone-sources-5.3* =sys-kernel/calculate-sources-5.3* =sys-kernel/bliss-kernel-5.3* =sys-kernel/vanilla-sources-5.3* =sys-kernel/ck-sources-5.3* =sys-kernel/git-sources-5.3* =sys-kernel/hardened-sources-5.3* =sys-kernel/minipli-sources-5.3* =sys-kernel/lh-sources-5.3* =sys-kernel/mips-sources-5.3* =sys-kernel/chromeos-sources-5.3* =sys-kernel/rt-sources-5.3* =sys-kernel/vserver-sources-5.3* =sys-kernel/xbox-sources-5.3* =sys-kernel/zen-sources-5.3* =sys-kernel/aufs-sources-5.3* =sys-kernel/raspberrypi-sources-5.3* =sys-kernel/reiser4-sources-5.3* =sys-kernel/adafruit-raspberrypi-sources-5.3* =sys-kernel/drm-raspberrypi-sources-5.3* =sys-kernel/nouveau-sources-5.3* =sys-kernel/bone-sources-5.3* ) )
+REQUIRED_USE=^^ ( gentoo-sources pf-sources )
+SLOT=5.3
+_md5_=25a4e4395161b41c300fc39f321dc42b

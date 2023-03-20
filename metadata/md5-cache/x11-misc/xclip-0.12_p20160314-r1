@@ -1,0 +1,13 @@
+DEFINED_PHASES=configure install prepare
+DEPEND=x11-libs/libX11 x11-libs/libXmu x11-libs/libXt sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71-r5 >=sys-devel/libtool-2.4.7
+DESCRIPTION=Command-line utility to read data from standard in and place it in an X selection
+EAPI=6
+HOMEPAGE=https://github.com/astrand/xclip
+INHERIT=autotools
+KEYWORDS=~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~x86-linux
+LICENSE=GPL-2
+RDEPEND=x11-libs/libX11 x11-libs/libXmu
+SLOT=0
+SRC_URI=https://github.com/astrand/xclip/archive/0a1bbcc10d1a17969587d5995e4d47ca543a129c.tar.gz
+_eclasses_=eqawarn	c9847c43b3253a276ae2eabddedab3d7	gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	libtool	9d3a9a889a6fa62ae794f817c156491b	autotools	b5529dc611971a61a30153916014f616
+_md5_=38edd8fb25951e46614b5b1e51cef13c

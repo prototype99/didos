@@ -1,0 +1,15 @@
+DEFINED_PHASES=compile configure install prepare
+DEPEND=rpc? ( net-libs/libtirpc ) selinux? ( sys-libs/libselinux ) rpc? ( virtual/pkgconfig )
+DESCRIPTION=Lists open files for running Unix processes
+EAPI=6
+HOMEPAGE=https://people.freebsd.org/~abe/
+INHERIT=rindeal flag-o-matic toolchain-funcs arrays
+IUSE=examples ipv6 rpc selinux static
+KEYWORDS=~amd64 ~arm ~arm64
+LICENSE=lsof
+RDEPEND=rpc? ( net-libs/libtirpc ) selinux? ( sys-libs/libselinux )
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://fossies.org/linux/misc/lsof_4.91_src.tar.bz2
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	desktop	021728fdc1b03b36357dbc89489e0f0d	edos2unix	33e347e171066657f91f8b0c72ec8773	estack	055c42df72f76a4f45ec92b35e83cd56	epatch	447396341f5f896d722e435a06f87a4f	eqawarn	c9847c43b3253a276ae2eabddedab3d7	ltprune	97143780d341cc8d8f1d4c6187a36d29	preserve-libs	a8e50acee31b5759b4df1f7707cae54b	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	vcs-clean	d271b7bc7e6a009758d7d4ef749174e3	wrapper	4a1902f969e5718126434fc35f3a0d9c	eutils	8f942ebdcf04334697649d4a0bf65a32	flag-o-matic	69394e25812406faa1f90edaf4969395	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=528e4be2f92b843d2ad0c1a8d408e2d9

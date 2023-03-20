@@ -1,0 +1,15 @@
+DEFINED_PHASES=install unpack
+DEPEND=virtual/opencl
+DESCRIPTION=Tool to display info about the system's OpenCL capabilities
+EAPI=6
+HOMEPAGE=https://github.com/Oblomov/clinfo
+INHERIT=rindeal git-hosting arrays
+IUSE=
+KEYWORDS=~amd64
+LICENSE=CC0-1.0
+RDEPEND=virtual/opencl
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/Oblomov/clinfo/archive/2.2.17.10.25.tar.gz -> github--Oblomov--clinfo--2.2.17.10.25.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-hosting	84f64c6eacd2317de2a33945695bb4ac	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=a0c3e639819cba63de54de434fc61f28

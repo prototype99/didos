@@ -1,0 +1,15 @@
+DEFINED_PHASES=compile configure install prepare unpack
+DEPEND=amd64? ( dev-libs/libx86emu ) sys-devel/flex >=sys-kernel/linux-headers-2.6.17 virtual/pkgconfig doc? ( app-doc/doxygen )
+DESCRIPTION=Hardware detection tool used in SuSE Linux
+EAPI=6
+HOMEPAGE=https://github.com/openSUSE/hwinfo
+INHERIT=rindeal git-hosting arrays
+IUSE=doc examples
+KEYWORDS=~amd64 ~arm ~arm64
+LICENSE=GPL-2
+RDEPEND=amd64? ( dev-libs/libx86emu ) dev-perl/XML-Parser virtual/udev
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/openSUSE/hwinfo/archive/21.53.tar.gz -> github--openSUSE--hwinfo--21.53.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-hosting	84f64c6eacd2317de2a33945695bb4ac	arrays	67c9a6badc2548df5269b316770bacc6
+_md5_=cef667707dca17f09e2c1a5fc17bdb50

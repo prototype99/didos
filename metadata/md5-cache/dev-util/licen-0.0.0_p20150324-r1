@@ -1,0 +1,16 @@
+BDEPEND=python_single_target_pypy3? ( >=dev-python/pypy3-7.3.11-r1:0= ) python_single_target_pypy3? ( >=dev-python/setuptools-65.7.0[python_targets_pypy3(-)] )
+DEFINED_PHASES=compile configure install prepare setup test unpack
+DESCRIPTION=Licence file generator. Yet another lice, but implemented with Jinja2 and docopt
+EAPI=7
+HOMEPAGE=https://github.com/lord63/licen
+INHERIT=rindeal git-hosting distutils-r1
+IUSE=+python_single_target_pypy3
+KEYWORDS=~amd64 ~arm ~arm64
+LICENSE=MIT
+RDEPEND=dev-python/docopt:0[%PYTHON_USEDEP-NEEDS-TO-BE-USED-IN-PYTHON_GEN_COND_DEP%] dev-python/jinja:0[%PYTHON_USEDEP-NEEDS-TO-BE-USED-IN-PYTHON_GEN_COND_DEP%] python_single_target_pypy3? ( >=dev-python/pypy3-7.3.11-r1:0= )
+REQUIRED_USE=^^ ( python_single_target_pypy3 )
+RESTRICT=mirror primaryuri
+SLOT=0
+SRC_URI=https://github.com/lord63/licen/archive/5969f6b11aa36e7f8da49b5cf81ef8d51415290f.tar.gz -> github--lord63--licen--5969f6b11aa36e7f8da49b5cf81ef8d51415290f.tar.gz
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-hosting	84f64c6eacd2317de2a33945695bb4ac	out-of-source-utils	1a9007554652a6e627edbccb3c25a439	multibuild	bddcb51b74f4a76724ff7cf8e7388869	multilib	5ca4e49abed8e3a2f7b56920eadee157	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	38c85b725d0467e51954ea921b6c104b	eapi8-dosym	741bfa77afb2a9321261501aca58c208	python-utils-r1	429bfd4e8d8e39db5385ba5744f30788	python-single-r1	75118e916668a74c660a13b0ecb22562	distutils-r1	ad4c1e4ec8737eb363aacd638f6a513b
+_md5_=1f64ba88e7be9c0a89ba85e56ed072cd
