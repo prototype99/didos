@@ -8,8 +8,8 @@ PYTHON_REQ_USE="xml"
 inherit gnome2 python-single-r1 systemd
 
 DESCRIPTION="Graphical user interface for CUPS administration"
-HOMEPAGE="https://github.com/zdohnal/system-config-printer"
-SRC_URI="https://github.com/zdohnal/${PN}/releases/download/${PV}/${P}.tar.xz
+HOMEPAGE="https://github.com/OpenPrinting/${PN}"
+SRC_URI="${HOMEPAGE}/releases/download/${PV}/${P}.tar.xz
 	https://dev.gentoo.org/~asturm/distfiles/${P}-patchset-01.tar.xz"
 
 LICENSE="GPL-2+"
