@@ -5,18 +5,14 @@
 EAPI=7
 inherit rindeal
 
-GH_RN="bitbucket"
-GH_REF="v${PV}"
-
 # DO NOT ADD pypy to PYTHON_COMPAT
 # pypy bundles a modified version of cffi. Use python_gen_cond_dep instead.
 PYTHON_COMPAT=( py{py3,thon{2_7,3_{5..7}}} )
 
-inherit git-hosting
-inherit distutils-r1
+inherit distutils-r1 pypi
 
 DESCRIPTION="Foreign Function Interface for Python calling C code"
-HOMEPAGE="https://cffi.readthedocs.org/ ${GH_HOMEPAGE} https://pypi.python.org/pypi/cffi"
+HOMEPAGE="https://cffi.readthedocs.org/ https://pypi.python.org/pypi/cffi"
 LICENSE="MIT"
 
 SLOT="0/${PV}"
