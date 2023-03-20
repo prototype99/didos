@@ -9,7 +9,7 @@ inherit vcs-snapshot java-pkg-2 java-pkg-simple
 
 DESCRIPTION="Native JNI component for dev-java/jansi"
 HOMEPAGE="http://jansi.fusesource.org/"
-SRC_URI="https://github.com/fusesource/${PN}/tarball/${P} -> ${P}.tar.gz"
+SRC_URI="https://github.com/fusesource/${PN}/archive/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
