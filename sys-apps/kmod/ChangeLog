@@ -1,3 +1,5 @@
+*kmod-28-r1
+::prototype99	fix url
 *kmod-28
 ::gentoo		add python3_8&3_9 support, update copyright&keywords&dependencies&logic
 *kmod-26-r7

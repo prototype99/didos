@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python{2_7,3_{4..9}} )
 
 inherit autotools bash-completion-r1 multilib python-r1
 
-SRC_URI="mirror://kernel/linux/utils/kernel/kmod/${P}.tar.xz"
+SRC_URI="https://www.kernel.org/pub/linux/utils/kernel/kmod/${P}.tar.xz"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 inherit libtool
 
