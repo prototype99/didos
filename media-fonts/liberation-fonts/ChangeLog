@@ -1,32 +1,30 @@
+*2.1.0_pre20190923-r3
+::prototype99	fix urls
 *2.1.0_pre20190923-r2
-	4.6.2020	::prototype99	make better use of ${PN}
-
+::prototype99	make better use of ${PN}
 *2.1.0_pre20190923-r1
-
-	25.11.2019	::prototype99
-		-fix mapping for dotless j
-		-fix mapping for heta
-		-fix mapping for pamphyllian digamma
-		-fix mapping for capital yot
-		-map a capital kai (semi-unofficial)
-		-map lha (semi-unofficial)
-		-map rha (semi-unofficial)
-		-map aleut ka (semi-unofficial)
-		-divide K into three separate parts to simplify drawing certain glyphs
-		-divide k (both variants) into two separate parts to simplify drawing certain glyphs
-		-convert L with stroke to use references
-		-convert l with stroke to use references
-		-remove duplicate dotless i
-		-remove 10 empty non-unicode characters
-		-remove 12 unnecessary codepoints
-
+::prototype99
+-fix mapping for dotless j
+-fix mapping for heta
+-fix mapping for pamphyllian digamma
+-fix mapping for capital yot
+-map a capital kai (semi-unofficial)
+-map lha (semi-unofficial)
+-map rha (semi-unofficial)
+-map aleut ka (semi-unofficial)
+-divide K into three separate parts to simplify drawing certain glyphs
+-divide k (both variants) into two separate parts to simplify drawing certain glyphs
+-convert L with stroke to use references
+-convert l with stroke to use references
+-remove duplicate dotless i
+-remove 10 empty non-unicode characters
+-remove 12 unnecessary codepoints
 *2.1.0_pre20190923
-
-	??????????	::prototype99
-		-switch to vishal-vvr fork
-		-split up conf file for more granular control
-		-add helvetica substitution
-		-remove reference to non-existent liberation sans narrow
-		-replace excessive spaces in conf files with tab characters
-		-add unmentioned arial replacement to description
-	??????????	::gentoo		base ebuild
+::prototype99
+-switch to vishal-vvr fork
+-split up conf file for more granular control
+-add helvetica substitution
+-remove reference to non-existent liberation sans narrow
+-replace excessive spaces in conf files with tab characters
+-add unmentioned arial replacement to description
+::gentoo		base ebuild

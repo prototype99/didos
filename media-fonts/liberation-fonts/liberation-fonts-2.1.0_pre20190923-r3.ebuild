@@ -9,7 +9,7 @@ inherit font python-any-r1
 
 NUM="bc729192aefce4cab6c67b61832ee430e7f54181"
 DESCRIPTION="A Helvetica/Times/Courier/Arial replacement TrueType font, courtesy of Red Hat"
-HOMEPAGE="https://github.com/vishal-vvr/liberation-fonts"
+HOMEPAGE="https://github.com/liberationfonts/liberation-fonts"
 #if you don't use fontforge you get the old 2.00.5 version sorry! also not tested...
 #let me know if it's successful and i'll remove this, saving precious storage space
 SRC_URI="!fontforge? ( ${HOMEPAGE}/files/2926169/${PN}-ttf-2.00.5.tar.gz )
