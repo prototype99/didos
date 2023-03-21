@@ -8,7 +8,7 @@ inherit multilib-minimal python-any-r1
 
 DESCRIPTION="C library for the Public Suffix List"
 HOMEPAGE="https://rockdaboot.github.io/${PN}"
-SRC_URI="https://github.com/rockdaboot/${PN}/releases/download/${PV}/${P}.tar.gz"
+SRC_URI="https://github.com/rockdaboot/${PN}/releases/download/${P}/${P}.tar.lz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ppc ppc64 ~riscv s390 sparc x86"

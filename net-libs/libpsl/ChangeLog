@@ -1,3 +1,5 @@
+*libpsl-0.21.0-r1
+::prototype99	fix url
 *libpsl-0.21.0
-::gentoo	more python compatibility, simplify ebuild
-::rindeal	base ebuild
+::gentoo		more python compatibility, simplify ebuild
+::rindeal		base ebuild
