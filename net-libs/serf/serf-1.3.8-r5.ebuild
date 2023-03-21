@@ -8,7 +8,7 @@ inherit eutils python-any-r1 scons-utils toolchain-funcs flag-o-matic
 
 DESCRIPTION="HTTP client library"
 HOMEPAGE="https://serf.apache.org/"
-SRC_URI="mirror://apache/${PN}/${P}.tar.bz2"
+SRC_URI="https://archive.apache.org/dist/serf/${P}.tar.bz2"
 
 LICENSE="Apache-2.0"
 SLOT="1"
