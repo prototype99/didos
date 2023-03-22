@@ -5,7 +5,7 @@ EAPI=6
 
 DESCRIPTION="ptrace() easy wrapper library"
 HOMEPAGE="https://dev.exherbo.org/~alip/pinktrace/"
-SRC_URI="http://distfiles.exherbo.org/distfiles/${P}.tar.bz2"
+SRC_URI="https://github.com/sydbox/${PN}/archive/refs/tags/v0.9.3.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/0.9"
