@@ -1,1 +1,0 @@
-smartgit-20.1.2.ebuild

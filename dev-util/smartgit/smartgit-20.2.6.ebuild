@@ -15,7 +15,7 @@ PV_MIN="$(ver_cut 2)"
 SLOT="${PV_MAJ}$( (( PV_MIN )) && echo ".${PV_MIN}" )"
 MY_PNS="${PN}${SLOT%%/*}"
 
-SRC_URI="https://www.syntevo.com/downloads/${PN}/${PN}-linux-20_2_1.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://www.syntevo.com/downloads/${PN}/archive/${PN}-linux-20_2_6.tar.gz -> ${P}.tar.gz"
 
 KEYWORDS="amd64 ~arm64"
 IUSE="+kernel +system-jre vanilla"

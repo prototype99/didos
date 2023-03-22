@@ -7,7 +7,7 @@
 -stop using rindeal eclass
 *smartgit-20.2_rc1
 ::prototype99	remove kinda useless comment, just hardcode the source url
-*smartgit-20.1.4
-just a simple symlink
+*smartgit-20.1.6
+::prototype99	fix url
 *smartgit-20.1.2
 ::prototype99	update url
