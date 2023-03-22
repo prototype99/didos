@@ -7,14 +7,8 @@ inherit cmake
 
 DESCRIPTION="Qt port of libfm, a library providing components to build desktop file managers"
 HOMEPAGE="https://lxqt.org/"
-
-if [[ "${PV}" == "9999" ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/lxqt/${PN}.git"
-else
-	SRC_URI="https://downloads.lxqt.org/downloads/${PN}/${PV}/${P}.tar.xz"
-	KEYWORDS="amd64 ~arm ~arm64 ~ppc64 x86"
-fi
+SRC_URI="https://github.com/lxqt/${PN}/releases/download/${PV}/${P}.tar.xz"
+KEYWORDS="amd64 ~arm ~arm64 ~ppc64 x86"
 
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0/5"
