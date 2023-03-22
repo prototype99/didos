@@ -1,6 +1,5 @@
+*sandbox-2.18-r1
+::prototype99	fix url
 *sandbox-2.18
-::gentoo
--base ebuild
-::rindeal
--ptrace use flag
--remove unneeded eutils.eclass
+::gentoo		base ebuild
+::rindeal		ptrace use flag, remove unneeded eutils.eclass
