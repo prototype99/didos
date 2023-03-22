@@ -1,0 +1,10 @@
+DEFINED_PHASES=configure install
+DESCRIPTION=ptrace() easy wrapper library
+EAPI=6
+HOMEPAGE=https://dev.exherbo.org/~alip/pinktrace/
+IUSE=ipv6
+KEYWORDS=~amd64
+LICENSE=BSD
+SLOT=0/0.9
+SRC_URI=https://github.com/sydbox/pinktrace/archive/refs/tags/v0.9.3.tar.gz
+_md5_=7b2f9bf81a8c4cc4ef7fbaf7bb519b66
