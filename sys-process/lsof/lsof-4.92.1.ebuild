@@ -17,7 +17,7 @@ LICENSE="lsof"
 MY_P="${P/-/_}_src"
 SLOT="0"
 SRC_URI_A=(
-	"https://fossies.org/linux/misc/${MY_P}.tar.bz2"
+	"https://github.com/lsof-org/lsof/archive/refs/tags/${PV}.tar.gz"
 )
 
 KEYWORDS="~amd64 ~arm ~arm64"
