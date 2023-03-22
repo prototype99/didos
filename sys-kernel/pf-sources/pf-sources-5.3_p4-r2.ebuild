@@ -35,20 +35,14 @@ detect_version
 
 DESCRIPTION="Linux kernel fork that includes the pf-kernel patchset and Gentoo's genpatches"
 
-PF_URI="https://github.com/pfactum/pf-kernel/compare/v${PV/_p*/}...v${PV/_p*/}-pf${PV/*_p/}.diff -> ${P}.patch"
 SRC_URI="
-	${KERNEL_URI}
-	${PF_URI}
+	https://codeberg.org/pf-kernel/linux/archive/v5.3-pf4.tar.gz -> ${P}.tar.gz
 	https://dev.gentoo.org/~mpagano/genpatches/tarballs/genpatches-${PV/_p*/}-${K_GENPATCHES_VER}.base.tar.xz
 	https://dev.gentoo.org/~mpagano/genpatches/tarballs/genpatches-${PV/_p*/}-${K_GENPATCHES_VER}.extras.tar.xz
 "
 
 KV_FULL="${PVR}-pf"
 S="${WORKDIR}/linux-${KV_FULL}"
-
-PATCHES=(
-	"${DISTDIR}/${P}.patch"
-)
 
 K_EXTRAEINFO="For more info on pf-sources and details on how to report problems,
 see: ${HOMEPAGE}."
