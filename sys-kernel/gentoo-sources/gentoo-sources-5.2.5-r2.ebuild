@@ -15,7 +15,7 @@ HOMEPAGE="https://dev.gentoo.org/~mpagano/genpatches"
 IUSE="experimental long-arg"
 
 DESCRIPTION="Full sources including the Gentoo patchset for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
-SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}"
+SRC_URI="${KERNEL_URI} https://dev.gentoo.org/~mpagano/genpatches/tarballs/genpatches-${KV_MAJOR}.${KV_MINOR}-${K_GENPATCHES_VER}.${i}.tar.xz https://dev.gentoo.org/~mpagano/genpatches/tarballs/genpatches-${KV_MAJOR}.${KV_MINOR}-${K_GENPATCHES_VER}.base.tar.xz https://dev.gentoo.org/~mpagano/genpatches/tarballs/genpatches-${KV_MAJOR}.${KV_MINOR}-${K_GENPATCHES_VER}.extras.tar.xz ${ARCH_URI}"
 
 src_prepare() {
 	use long-arg && eapply "${FILESDIR}"/long-arg.patch
