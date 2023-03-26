@@ -1,2 +1,0 @@
-app-text/mupdf -opengl
-media-video/ffmpeg -vpx

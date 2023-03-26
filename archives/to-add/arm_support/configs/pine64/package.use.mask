@@ -1,2 +1,0 @@
-# restore cairo gles2 flag on arm
-x11-libs/cairo -gles2

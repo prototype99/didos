@@ -1,1 +1,0 @@
-KERNEL=="pvrsrvkm", MODE="0666"

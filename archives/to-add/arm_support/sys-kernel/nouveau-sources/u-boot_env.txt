@@ -1,4 +1,0 @@
-
-bootargs mem=384M@0M mem=512M@512M nvmem=128M@384M vmalloc=248M video=tegrafb console=ttyS0,115200n8 rw root=/dev/mmcblk0p2 nohdparm rootwait
-
-bootargs ro root=/dev/mmcblk0p2 nohdparm rootwait console=ttyS0,115200n8 console=tty1 net.ifnames=0 cma=64M earlyprintk

@@ -1,1 +1,0 @@
-coherent_pool=6M smsc95xx.turbo_mode=N debug console=tty0 root=/dev/mmcblk0p2 rootwait ro rootfstype=ext4 elevator=deadline
