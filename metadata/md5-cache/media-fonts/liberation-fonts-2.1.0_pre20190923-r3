@@ -10,5 +10,5 @@ KEYWORDS=~alpha ~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~x86 ~x64-cygwin ~amd64-lin
 LICENSE=OFL-1.1
 SLOT=0
 SRC_URI=!fontforge? ( https://github.com/liberationfonts/liberation-fonts/files/2926169/liberation-fonts-ttf-2.00.5.tar.gz ) fontforge? ( https://github.com/liberationfonts/liberation-fonts/archive/bc729192aefce4cab6c67b61832ee430e7f54181.zip -> liberation-fonts-2.1.0_pre20190923.zip )
-_eclasses_=font	aa113a3df9cd0a9693a1c1ee7c34a6eb	eapi8-dosym	741bfa77afb2a9321261501aca58c208	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	python-utils-r1	429bfd4e8d8e39db5385ba5744f30788	python-any-r1	d2955aaac8daaaa69fcc6dc93ed19f29
+_eclasses_=font	aa113a3df9cd0a9693a1c1ee7c34a6eb	eapi8-dosym	741bfa77afb2a9321261501aca58c208	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	d1408425c7c4a7669b9b17735404b693	python-utils-r1	429bfd4e8d8e39db5385ba5744f30788	python-any-r1	d2955aaac8daaaa69fcc6dc93ed19f29
 _md5_=b39a410d1a7600bbf3d61ecbad841059
