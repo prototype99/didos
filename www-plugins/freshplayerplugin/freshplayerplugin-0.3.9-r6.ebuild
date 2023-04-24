@@ -21,7 +21,7 @@ HWDEC_DEPEND="media-video/ffmpeg:0=[vaapi?,vdpau?]
 COMMON_DEPEND="
 	dev-libs/glib:2=
 	dev-libs/icu:0=
-	dev-libs/libevent:=[threads]
+	dev-libs/libevent:=[threads(+)]
 	media-libs/alsa-lib:=
 	media-libs/freetype:2=
 	media-libs/libva:=[X]
