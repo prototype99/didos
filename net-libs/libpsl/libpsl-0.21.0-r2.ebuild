@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_{5..9}} )
+PYTHON_COMPAT=( python{2_7,3_{5..10}} )
 inherit multilib-minimal python-any-r1
 
 DESCRIPTION="C library for the Public Suffix List"
