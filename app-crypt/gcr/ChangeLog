@@ -1,3 +1,5 @@
+*gcr-3.36.0-r2
+::prototype99			add python3_10 support
 *gcr-3.36.0-r1
 ::prototype99			add python3_9 support
 *gcr-3.36.0
@@ -10,6 +12,8 @@
 -update dependencies and ordering
 -update to meson
 -remove old workaround
+*gcr-3.34.0-r5
+::prototype99			add python3_10 support
 *gcr-3.34.0-r4
 ::prototype99			add python3_9 support
 *gcr-3.34.0-r3

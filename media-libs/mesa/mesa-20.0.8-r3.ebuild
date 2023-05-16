@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5..9} )
+PYTHON_COMPAT=( python3_{5..10} )
 
 inherit llvm meson multilib-minimal python-any-r1 linux-info
 

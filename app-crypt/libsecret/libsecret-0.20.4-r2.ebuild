@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_{6..9} )
+PYTHON_COMPAT=( python3_{6..10} )
 VALA_USE_DEPEND=vapigen
 
 inherit gnome2 meson multilib-minimal python-any-r1 vala virtualx
@@ -25,8 +25,8 @@ DEPEND="
 	introspection? ( >=dev-libs/gobject-introspection-1.29:= )
 "
 RDEPEND="${DEPEND}"
-# gnome-keyring needed at runtime as explained at https://bugs.gentoo.org/475182#c2
-PDEPEND=">=gnome-base/gnome-keyring-3" # to avoid circular dep (bug #547456)
+# Allow for use of KeePassXC as alternative secret service provider
+PDEPEND="|| ( >=gnome-base/gnome-keyring-3 app-admin/keepassxc )"
 BDEPEND="
 	dev-libs/libxslt
 	dev-util/gdbus-codegen

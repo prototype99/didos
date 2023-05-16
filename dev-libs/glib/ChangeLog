@@ -1,3 +1,5 @@
+*glib-2.65.0-r2
+::prototype99	add python 3_10 support
 *glib-2.65.0-r1
 ::prototype99	remove pointless extra function and variables, stop using l10n-r1
 *glib-2.65.0

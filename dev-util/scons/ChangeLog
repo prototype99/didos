@@ -1,9 +1,13 @@
+*scons-3.1.2-r3
+::prototype99	add python3_10 support
 *scons-3.1.2-r2
 ::prototype99	add python3_9 support
 *scons-3.1.2-r1
 ::prototype99	improve python use flags
 *scons-3.1.2
 ::gentoo		updated workarounds, switch to https, updated keywords
+*scons-3.1.1-r3
+::prototype99	add python3_10 support
 *scons-3.1.1-r2
 ::prototype99	add python3_9 support
 *scons-3.1.1-r1

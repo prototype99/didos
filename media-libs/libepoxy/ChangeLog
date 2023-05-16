@@ -1,3 +1,5 @@
+*libepoxy-1.5.5-r1
+::prototype99	add python3_10 support
 *libepoxy-1.5.5
 ::gentoo		metadata
 ::gnux32		less whitespace

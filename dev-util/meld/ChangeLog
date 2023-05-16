@@ -1,3 +1,6 @@
+*meld-3.21.0-r5
+::prototype99
+-add python3_10 support
 *meld-3.21.0-r4
 ::prototype99
 -add python3_9 support

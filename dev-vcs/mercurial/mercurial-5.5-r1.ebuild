@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{6..9} )
+PYTHON_COMPAT=( python2_7 python3_{6..10} )
 PYTHON_REQ_USE="threads(+),ssl"
 
 inherit bash-completion-r1 elisp-common eutils distutils-r1 flag-o-matic
