@@ -1,26 +1,24 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=6
 
 inherit eutils desktop
 
-REVISION=58052
+REVISION=56680
 
 DESCRIPTION="An open source metaverse viewer"
 HOMEPAGE="http://www.firestormviewer.org/"
 
-MY_P="Phoenix_Firestorm-Releasex64_x86_64_${PV}.${REVISION}"
-# SRC_URI="https://downloads.firestormviewer.org/preview/linux/${MY_P}.tar.xz"
-SRC_URI="http://downloads.firestormviewer.org/linux/${MY_P}.tar.xz"
-# http://downloads.firestormviewer.org/linux/Phoenix_Firestorm-Releasex64_x86_64_6.3.2.58052.tar.xz
+MY_P="Phoenix_FirestormOS-Releasex64_x86_64_${PV}.${REVISION}"
+SRC_URI="https://downloads.firestormviewer.org/linux/${MY_P}.tar.xz"
 
 RESTRICT="mirror"
 
-LICENSE="GPL-2-with-Linden-Lab-FLOSS-exception"
+LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64 -*"
-IUSE=""
+KEYWORDS="-* ~amd64"
+IUSE="fmod"
 
 INST_DIR="opt/firestorm-bin"
 QA_PREBUILT="${INST_DIR}/*"
@@ -33,17 +31,18 @@ RDEPEND="
 	x11-libs/libXdmcp
 	x11-libs/libXext
 	x11-libs/libXinerama
+	dev-libs/apr
 	dev-libs/libgcrypt
 	dev-libs/libgpg-error
-	dev-libs/openssl
+	dev-libs/openssl:*
 	dev-libs/boost
 	media-libs/freetype
 	media-libs/libogg
 	media-libs/libsdl
 	media-libs/libvorbis
-	media-libs/gstreamer
-	media-libs/openal
-	media-plugins/gst-plugins-meta
+	media-libs/gstreamer:*
+	media-plugins/gst-plugins-meta:*
+	fmod? ( media-libs/fmod )
 	net-libs/gnutls
 	net-misc/curl
 	net-dns/c-ares
