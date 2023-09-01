@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 PYTHON_COMPAT=( python3_{5..10} )
 
 inherit eutils elisp-common gnome2 python-single-r1 readme.gentoo-r1

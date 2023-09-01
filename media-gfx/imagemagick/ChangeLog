@@ -15,6 +15,8 @@
 -put required use somewhere more logical
 -don't build with jxl
 -minor directory changes
+*7.0.8.68-r2
+::prototype99	update to eapi 8
 *7.0.8.68-r1
 ::prototype99	bump eapi
 *7.0.8.68

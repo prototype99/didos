@@ -13,12 +13,20 @@
 -improve dependency versioning
 -add darwin workaround
 -do not turn on vala by default
+*librsvg-2.46.3-r2
+::prototype99	update to eapi 8
 *librsvg-2.46.3-r1
 ::prototype99	switch to eapi 7
 *librsvg-2.46.3
 ::prototype99	add rust fix
+*librsvg-2.45.90-r2
+::prototype99	update to eapi 8
 *<=librsvg-2.45.90-r1
 ::gentoo		gtk3 patch
 ::gnome			debug use flag
 ::gnome-next	prevent incompatible rust-bin
 ::prototype99	switch to eapi 7
+*librsvg-2.45.8-r2
+::prototype99	update to eapi 8
+*librsvg-2.45.6-r2
+::prototype99	update to eapi 8

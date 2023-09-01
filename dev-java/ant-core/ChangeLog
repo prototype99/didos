@@ -1,13 +1,8 @@
+*ant-core-1.10.7-r2
+::prototype99	update to eapi 8
 *ant-core-1.10.7-r1
-::prototype99
--remove broken url
+::prototype99	remove broken url
 *ant-core-1.10.7
-::gentoo
--bump to eapi 7
--simpler patching
--update depend logic
--remake patch
+::gentoo		bump to eapi 7, simpler patching, update depend logic, remake patch
 *ant-core-1.10.5-r2
-::prototype99
--updated patches to fix libreoffice compilation (by adapting tools.jar warning to a simple dependency check)
--allow jdk 10.
+::prototype99	updated patches to fix libreoffice compilation (by adapting tools.jar warning to a simple dependency check), allow jdk 10.

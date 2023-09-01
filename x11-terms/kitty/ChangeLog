@@ -1,9 +1,13 @@
+*kitty-0.17.4-r3
+::prototype99	update to eapi 8
 *kitty-0.17.4-r2
 ::prototype99	add python3_10 support
 *kitty-0.17.4-r1
 ::prototype99	add python3_9 support
 *kitty-0.17.4
 ::prototype99	improve python use flags
+*kitty-0.17.3-r3
+::prototype99	update to eapi 8
 *kitty-0.17.3-r2
 ::prototype99	add python3_10 support
 *kitty-0.17.3-r1

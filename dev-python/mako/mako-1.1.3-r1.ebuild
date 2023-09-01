@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DISTUTILS_USE_SETUPTOOLS=rdepend
 PYTHON_COMPAT=( py{py{,3},thon{2_7,3_{6..9}}} )

@@ -1,5 +1,9 @@
+*curl-7.74.0-r3
+::prototype99	update to eapi 8
 *curl-7.74.0-r2
 ::gentoo		add the ability to add extra ssls
+*curl-7.71.1-r1
+::prototype99	update to eapi 8
 *curl-7.71.1
 ::gentoo		base ebuild
 ::prototype99	simplify dependencies, remove redundant required use logic, remove extra comments that just make things more confusing, simply use flag naming, tighten required use, remove duplicate code

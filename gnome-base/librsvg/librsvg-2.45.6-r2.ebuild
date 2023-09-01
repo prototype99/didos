@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 GNOME2_LA_PUNT="yes"
 VALA_USE_DEPEND="vapigen"
 
@@ -14,7 +14,7 @@ LICENSE="LGPL-2"
 SLOT="2"
 KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~amd64-linux ~arm-linux ~x86-linux ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
 
-IUSE="debug +introspection tools vala"
+IUSE="+introspection tools vala"
 REQUIRED_USE="vala? ( introspection )"
 
 RDEPEND="
@@ -39,15 +39,15 @@ DEPEND="${RDEPEND}
 "
 # >=gtk-doc-am-1.13, gobject-introspection-common, vala-common needed by eautoreconf
 
-# Rust does not know the *-pc-* variants of target triples, but these ones.
-CHOST_amd64=x86_64-unknown-linux-gnu
-CHOST_x86=i686-unknown-linux-gnu
-CHOST_arm64=aarch64-unknown-linux-gnu
-
 src_prepare() {
+	# https://bugzilla.gnome.org/show_bug.cgi?id=653323
+	eapply "${FILESDIR}/${PN}-2.40.12-gtk-optional.patch"
 	local build_dir
 
+	eautoreconf
+
 	use vala && vala_src_prepare
+	gnome2_src_prepare
 
 	# Work around issue where vala file is expected in local
 	# directory instead of source directory.
@@ -56,11 +56,6 @@ src_prepare() {
 		mkdir -p "${build_dir}"
 		cp -p "${S}/Rsvg-2.0-custom.vala" "${build_dir}"|| die
 	done
-
-	gnome2_src_prepare
-
-	# important to do it after patches
-	eautoreconf
 }
 
 multilib_src_configure() {
@@ -76,10 +71,8 @@ multilib_src_configure() {
 	ECONF_SOURCE=${S} \
 	cross_compiling=yes \
 	gnome2_src_configure \
-		--build=${CHOST_default} \
 		--disable-static \
 		--disable-tools \
-		$(use_enable debug) \
 		$(multilib_native_use_enable introspection) \
 		$(multilib_native_use_with tools gtk3) \
 		$(multilib_native_use_enable vala) \

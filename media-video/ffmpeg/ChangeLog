@@ -1,7 +1,11 @@
+*ffmpeg-4.3.1-r1
+::prototype99	update to eapi 8
 *ffmpeg-4.3.1
 ::gentoo				update keywords, add rav1e use flag, update some use flags
 ::prototype99			remove snapshot specific code
 ::telans				add svt use flags
+*ffmpeg-4.3-r1
+::prototype99	update to eapi 8
 *ffmpeg-4.3
 ::fem-overlay			add decklink support, better differentiate X/xcb for gpl licencing critical situations, block clashing package
 ::genpi64				add keywords, add v4l2m2m-fix use flag, add versioning for dependency

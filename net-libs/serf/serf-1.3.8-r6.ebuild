@@ -1,7 +1,7 @@
 # Copyright 2008-2019 Arfrever Frehtes Taifersar Arahesis and others
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI=8
 
 PYTHON_COMPAT=(python3_{6..11})
 inherit eutils python-any-r1 scons-utils toolchain-funcs flag-o-matic

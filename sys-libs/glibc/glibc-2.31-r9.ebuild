@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{6..10} )
 
@@ -15,28 +15,27 @@ SLOT="2.2"
 
 EMULTILIB_PKG="true"
 
-if [[ ${PV} == 9999* ]]; then
-	EGIT_REPO_URI="https://sourceware.org/git/glibc.git"
-	inherit git-r3
-else
-	KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
-	SRC_URI="mirror://gnu/glibc/${P}.tar.xz"
-fi
+KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~m68k ~mips ppc ppc64 ~riscv ~s390 ~sparc x86"
+SRC_URI="mirror://gnu/glibc/${P}.tar.xz"
+SRC_URI+=" https://dev.gentoo.org/~dilfridge/distfiles/${P}-patches-9.tar.xz"
 
-RELEASE_VER=${PV}
+SRC_URI+=" https://gitweb.gentoo.org/proj/locale-gen.git/snapshot/locale-gen-2.00.tar.gz"
+SRC_URI+=" multilib? ( https://dev.gentoo.org/~dilfridge/distfiles/gcc-multilib-bootstrap-20180511.tar.xz )"
 
-GCC_BOOTSTRAP_VER=20180511
+IUSE="abi_x86_x32 audit caps cet compile-locales +crypt custom-cflags doc gd headers-only +multiarch multilib nscd profile selinux +ssp +static-libs static-pie suid systemtap test vanilla"
 
-# Gentoo patchset
-PATCH_VER=10
-PATCH_DEV=dilfridge
-
-IDN=">=net-dns/libidn2-2.3.0"
-
-SRC_URI+=" https://dev.gentoo.org/~${PATCH_DEV}/distfiles/${P}-patches-${PATCH_VER}.tar.xz"
-SRC_URI+=" multilib? ( https://dev.gentoo.org/~dilfridge/distfiles/gcc-multilib-bootstrap-${GCC_BOOTSTRAP_VER}.tar.xz )"
-
-IUSE="audit caps cet compile-locales +crypt custom-cflags doc gd headers-only +multiarch multilib nscd profile selinux +ssp +static-libs suid systemtap test vanilla"
+REQUIRED_USE="
+abi_x86_x32? ( !vanilla )
+arm? ( !vanilla )
+arm64? ( !vanilla )
+hppa? ( !vanilla )
+ia64? ( !vanilla )
+mips? ( !vanilla )
+ppc? ( !vanilla )
+riscv? ( !vanilla )
+sparc? ( !vanilla )
+x86? ( !vanilla )
+"
 
 # Minimum kernel version that glibc requires
 MIN_KERN_VER="3.2.0"
@@ -86,6 +85,11 @@ fi
 # We need a new-enough binutils/gcc to match upstream baseline.
 # Also we need to make sure our binutils/gcc supports TLS,
 # and that gcc already contains the hardened patches.
+TOOLDEP="
+	app-arch/gzip
+	sys-apps/grep
+	virtual/awk
+"
 BDEPEND="
 	${PYTHON_DEPS}
 	>=app-misc/pax-utils-0.1.10
@@ -93,6 +97,9 @@ BDEPEND="
 	!<sys-devel/bison-2.7
 	!<sys-devel/make-4
 	doc? ( sys-apps/texinfo )
+	!compile-locales? (
+		${TOOLDEP}
+	)
 "
 COMMON_DEPEND="
 	gd? ( media-libs/gd:2= )
@@ -104,15 +111,17 @@ COMMON_DEPEND="
 	selinux? ( sys-libs/libselinux )
 	systemtap? ( dev-util/systemtap )
 "
+IDN=">=net-dns/libidn2-2.3.0"
 DEPEND="${COMMON_DEPEND}
+	compile-locales? (
+		${TOOLDEP}
+	)
 	test? ( ${IDN} )
 "
 RDEPEND="${COMMON_DEPEND}
+	${TOOLDEP}
 	sys-apps/gentoo-functions
 "
-
-RESTRICT="!test? ( test )"
-
 if [[ ${CATEGORY} == cross-* ]] ; then
 	BDEPEND+=" !headers-only? (
 		>=${CATEGORY}/binutils-2.24
@@ -132,23 +141,26 @@ else
 	PDEPEND+=" !vanilla? ( sys-libs/timezone-data )"
 fi
 
-	# Ignore tests whitelisted below
+RESTRICT="!test? ( test )"
+
+# Ignore tests whitelisted below
 GENTOO_GLIBC_XFAIL_TESTS="${GENTOO_GLIBC_XFAIL_TESTS:-yes}"
+
 # The following tests fail due to the Gentoo build system and are thus
 # executed but ignored:
 XFAIL_TEST_LIST=(
-	# 1) Sandbox
-	tst-ldconfig-bad-aux-cache
-	tst-pldd
-	tst-mallocfork2
-	tst-nss-db-endgrent
-	tst-nss-db-endpwent
-	tst-nss-files-hosts-long
-	tst-nss-test3
-	# 2) Namespaces and cgroup
-	tst-locale-locpath
 	# 9) Failures of unknown origin
 	tst-latepthread
+
+	# buggy test, assumes /dev/ and /dev/null on a single filesystem
+	# 'mount --bind /dev/null /chroot/dev/null' breaks it.
+	# https://sourceware.org/PR25909
+	tst-support_descriptors
+
+	# Flaky test, known to fail occasionally:
+	# https://sourceware.org/PR19329
+	# https://bugs.gentoo.org/719674#c12
+	tst-stack4
 )
 
 #
@@ -221,7 +233,8 @@ do_compile_test() {
 	rm -f glibc-test*
 	printf '%b' "$*" > glibc-test.c
 
-	nonfatal emake glibc-test
+	# Most of the time CC is already set, but not in early sanity checks.
+	nonfatal emake glibc-test CC="${CC-$(tc-getCC ${CTARGET})}"
 	ret=$?
 
 	popd >/dev/null
@@ -297,6 +310,14 @@ setup_target_flags() {
 		mips)
 			# The mips abi cannot support the GNU style hashes. #233233
 			filter-ldflags -Wl,--hash-style=gnu -Wl,--hash-style=both
+		;;
+		ppc|ppc64)
+			# Many arch-specific implementations do not work on ppc with
+			# cache-block not equal to 128 bytes. This breaks memset:
+			#   https://sourceware.org/PR26522
+			#   https://bugs.gentoo.org/737996
+			# Use default -mcpu=. For ppc it means non-multiarch setup.
+			filter-flags '-mcpu=*'
 		;;
 		sparc)
 			# Both sparc and sparc64 can use -fcall-used-g6.  -g7 is bad, though.
@@ -551,29 +572,8 @@ foreach_abi() {
 
 glibc_banner() {
 	local b="Gentoo ${PVR}"
-	[[ -n ${PATCH_VER} ]] && ! use vanilla && b+=" p${PATCH_VER}"
+	[[ -n 9 ]] && ! use vanilla && b+=" p9"
 	echo "${b}"
-}
-
-check_devpts() {
-	# Make sure devpts is mounted correctly for use w/out setuid pt_chown.
-
-	# If merely building the binary package, then there's nothing to verify.
-	[[ ${MERGE_TYPE} == "buildonly" ]] && return
-
-	# Only sanity check when installing the native glibc.
-	[[ -n ${ROOT} ]] && return
-
-	# If they're opting in to the old suid code, then no need to check.
-	use suid && return
-
-	if awk '$3 == "devpts" && $4 ~ /[, ]gid=5[, ]/ { exit 1 }' /proc/mounts ; then
-		eerror "In order to use glibc with USE=-suid, you must make sure that"
-		eerror "you have devpts mounted at /dev/pts with the gid=5 option."
-		eerror "Openrc should do this for you, so you should check /etc/fstab"
-		eerror "and make sure you do not have any invalid settings there."
-		die "mount & fix your /dev/pts settings"
-	fi
 }
 
 # The following Kernel version handling functions are mostly copied from portage
@@ -645,9 +645,6 @@ get_kheader_version() {
 # pkg_ and src_ phases, so we call this function both in pkg_pretend and in
 # src_unpack.
 sanity_prechecks() {
-	# Make sure devpts is mounted correctly for use w/out setuid pt_chown
-	check_devpts
-
 	# Prevent native builds from downgrading
 	if [[ ${MERGE_TYPE} != "buildonly" ]] && \
 	   [[ -z ${ROOT} ]] && \
@@ -789,24 +786,106 @@ src_unpack() {
 	# Consistency is not guaranteed between pkg_ and src_ ...
 	sanity_prechecks
 
-	use multilib && unpack gcc-multilib-bootstrap-${GCC_BOOTSTRAP_VER}.tar.xz
+	use multilib && unpack gcc-multilib-bootstrap-20180511.tar.xz
 
 	setup_env
 
-	if [[ -n ${EGIT_REPO_URI} ]] ; then
-		git-r3_src_unpack
-	else
-		unpack ${P}.tar.xz
-	fi
+	unpack ${P}.tar.xz
 
 	cd "${WORKDIR}" || die
-	unpack glibc-${RELEASE_VER}-patches-${PATCH_VER}.tar.xz
+	unpack ${P}-patches-9.tar.xz
+
+	cd "${WORKDIR}" || die
+	unpack locale-gen-2.00.tar.gz
 }
 
 src_prepare() {
 	if ! use vanilla ; then
-		elog "Applying Gentoo Glibc Patchset ${RELEASE_VER}-${PATCH_VER}"
-		eapply "${WORKDIR}"/patches
+		elog "Applying Gentoo Glibc Patchset 2.31-9"
+		#patch 25 depends on patch 18 depends on patch 14
+		#patch 72 depends on patch 71 deoends on patch 65 depends on patch 59 depends on patch 54 depends on patch 52
+		local PATCHDIR="${WORKDIR}"/patches
+		local PATCHES=(
+			"${PATCHDIR}"/0001-Gentoo-disable-ldconfig-during-install.patch
+			"${PATCHDIR}"/0004-Revert-sysdeps-posix-getaddrinfo.c-gaih_inet-Only-us.patch
+			"${PATCHDIR}"/0006-Gentoo-Disable-test-that-fails-because-of-the-gethos.patch
+			"${PATCHDIR}"/0007-Gentoo-Adapt-to-Gentoo-specific-etc-mail-aliases.patch
+			"${PATCHDIR}"/0008-Gentoo-Add-a-C.UTF-8-locale.patch
+			"${PATCHDIR}"/0009-Gentoo-force-O0-in-conform-tests-to-survive-CC-chang.patch
+			"${PATCHDIR}"/0010-Gentoo-Adapt-tests-to-etc-mail-alias-location.patch
+			"${PATCHDIR}"/0013-mips-Use-long-int-and-long-long-int-in-linux-syscall.patch
+			"${PATCHDIR}"/0014-mips-Fix-argument-passing-for-inlined-syscalls-on-Li.patch
+			"${PATCHDIR}"/0017-malloc-tst-mallocfork2-Kill-lingering-process-for-un.patch
+			"${PATCHDIR}"/0018-Avoid-ldbl-96-stack-corruption-from-range-reduction-.patch
+			"${PATCHDIR}"/0025-math-test-sinl-pseudo-Use-stack-protector-only-if-av.patch
+			"${PATCHDIR}"/0039-nios2-delete-sysdeps-unix-sysv-linux-nios2-kernel-fe.patch
+			"${PATCHDIR}"/0050-oc_FR-locale-Fix-spelling-of-Thursday-bug-25639.patch
+			"${PATCHDIR}"/0051-oc_FR-locale-Fix-spelling-of-April-bug-25639.patch
+			"${PATCHDIR}"/0053-x86-64-Use-RDX_LP-on-__x86_shared_non_temporal_thres.patch
+			"${PATCHDIR}"/0061-sparc-Use-Linux-kABI-for-syscall-return.patch
+			"${PATCHDIR}"/0067-arm-CVE-2020-6096-fix-memcpy-and-memmove-for-negativ.patch
+			"${PATCHDIR}"/0068-arm-CVE-2020-6096-Fix-multiarch-memcpy-for-negative-.patch
+		)
+		if use abi_x86_x32; then
+			PATCHES+=(
+				"${PATCHDIR}"/0043-x32-Properly-pass-long-to-syscall-BZ-25810.patch
+				"${PATCHDIR}"/0044-Add-SYSCALL_ULONG_ARG_-12-to-pass-long-to-syscall-BZ.patch
+			)
+		fi
+		if use arm; then
+			PATCHES+=(
+				"${PATCHDIR}"/0023-arm-Fix-softp-fp-Implies-BZ-25635.patch
+			)
+		fi
+		if use arm64; then
+			PATCHES+=(
+				"${PATCHDIR}"/0028-Update-syscall-lists-for-Linux-5.5.patch
+				"${PATCHDIR}"/0057-aarch64-Accept-PLT-calls-to-__getauxval-within-libc..patch
+				"${PATCHDIR}"/0058-aarch64-fix-strcpy-and-strnlen-for-big-endian-BZ-258.patch
+			)
+		fi
+		if use hppa; then
+			PATCHES+=(
+				"${PATCHDIR}"/0040-Fix-data-race-in-setting-function-descriptors-during.patch
+				"${PATCHDIR}"/0041-Add-new-file-missed-in-previous-hppa-commit.patch
+			)
+		fi
+		if use ia64; then
+			PATCHES+=(
+				"${PATCHDIR}"/0063-Fix-miscompilation-on-ia64-s-gcc-10.patch
+			)
+		fi
+		if use mips; then
+			PATCHES+=(
+				"${PATCHDIR}"/0038-mips-Fix-bracktrace-result-for-signal-frames.patch
+			)
+		fi
+		if use ppc || use ppc64; then
+			PATCHES+=(
+				"${PATCHDIR}"/0048-powerpc-Rename-argN-to-_argN-in-LOADARGS_N-BZ-25902.patch
+			)
+		fi
+		if use riscv; then
+			PATCHES+=(
+				"${PATCHDIR}"/0016-riscv-Avoid-clobbering-register-parameters-in-syscal.patch
+			)
+		fi
+		if use sparc; then
+			PATCHES+=(
+				"${PATCHDIR}"/0024-sparc-Move-sigreturn-stub-to-assembly.patch
+				"${PATCHDIR}"/0062-sparc-Avoid-clobbering-register-parameters-in-syscal.patch
+			)
+		fi
+		if use x86; then
+			PATCHES+=(
+				"${PATCHDIR}"/0020-i386-Use-comdat-instead-of-.gnu.linkonce-for-i386-se.patch
+			)
+			if gcc-major-version > 4; then
+				PATCHES+=(
+					"${PATCHDIR}"/0031-i386-Disable-check_consistency-for-GCC-5-and-above-B.patch
+				)
+			fi
+		fi
 		einfo "Done."
 	fi
 
@@ -816,6 +895,10 @@ src_prepare() {
 
 	cd "${WORKDIR}"
 	find . -name configure -exec touch {} +
+
+	# move the external locale-gen to its old place
+	mkdir extra || die
+	mv locale-gen-2.00 extra/locale || die
 
 	eprefixify extra/locale/locale-gen
 
@@ -842,7 +925,7 @@ glibc_do_configure() {
 	fi
 
 	local v
-	for v in ABI CBUILD CHOST CTARGET CBUILD_OPT CTARGET_OPT CC CXX LD {AS,C,CPP,CXX,LD}FLAGS MAKEINFO ; do
+	for v in ABI CBUILD CHOST CTARGET CBUILD_OPT CTARGET_OPT CC CXX LD {AS,C,CPP,CXX,LD}FLAGS MAKEINFO NM READELF; do
 		einfo " $(printf '%15s' ${v}:)   ${!v}"
 	done
 
@@ -870,6 +953,14 @@ glibc_do_configure() {
 		export CXX=
 	fi
 	einfo " $(printf '%15s' 'Manual CXX:')   ${CXX}"
+
+	# Always use tuple-prefixed toolchain. For non-native ABI glibc's configure
+	# can't detect them automatically due to ${CHOST} mismatch and fallbacks
+	# to unprefixed tools. Similar to multilib.eclass:multilib_toolchain_setup().
+	export NM="$(tc-getNM ${CTARGET})"
+	export READELF="$(tc-getREADELF ${CTARGET})"
+	einfo " $(printf '%15s' 'Manual NM:')   ${NM}"
+	einfo " $(printf '%15s' 'Manual READELF:')   ${READELF}"
 
 	echo
 
@@ -966,6 +1057,7 @@ glibc_do_configure() {
 		--with-pkgversion="$(glibc_banner)"
 		$(use_enable crypt)
 		$(use_multiarch || echo --disable-multi-arch)
+		$(use_enable static-pie)
 		$(use_enable systemtap)
 		$(use_enable nscd)
 		${EXTRA_ECONF}
@@ -1010,10 +1102,10 @@ glibc_do_configure() {
 	# is built with MULTILIB_ABIS="amd64 x86" but we want to
 	# add x32 to it, gcc/glibc don't yet support x32.
 	#
-	if [[ -n ${GCC_BOOTSTRAP_VER} ]] && use multilib ; then
+	if [[ -n 20180511 ]] && use multilib ; then
 		echo 'main(){}' > "${T}"/test.c
 		if ! $(tc-getCC ${CTARGET}) ${CFLAGS} ${LDFLAGS} "${T}"/test.c -Wl,-emain -lgcc 2>/dev/null ; then
-			sed -i -e '/^CC = /s:$: -B$(objdir)/../'"gcc-multilib-bootstrap-${GCC_BOOTSTRAP_VER}/${ABI}:" config.make || die
+			sed -i -e '/^CC = /s:$: -B$(objdir)/../'"gcc-multilib-bootstrap-20180511/${ABI}:" config.make || die
 		fi
 	fi
 }
@@ -1160,13 +1252,18 @@ src_compile() {
 
 glibc_src_test() {
 	cd "$(builddir nptl)"
+
 	local myxfailparams=""
 	if [[ "${GENTOO_GLIBC_XFAIL_TESTS}" == "yes" ]] ; then
 		for myt in ${XFAIL_TEST_LIST[@]} ; do
 			myxfailparams+="test-xfail-${myt}=yes "
 		done
 	fi
-	emake ${myxfailparams} check
+
+	# sandbox does not understand unshare() and prevents
+	# writes to /proc/, which makes many tests fail
+
+	SANDBOX_ON=0 LD_PRELOAD= emake ${myxfailparams} check
 }
 
 do_src_test() {
@@ -1208,8 +1305,10 @@ run_locale_gen() {
 		locale_list="${root}/usr/share/i18n/SUPPORTED"
 	fi
 
-	locale-gen ${inplace} --jobs $(makeopts_jobs) --config "${locale_list}" \
+	set -- locale-gen ${inplace} --jobs $(makeopts_jobs) --config "${locale_list}" \
 		--destdir "${root}"
+	echo "$@"
+	"$@"
 
 	popd >/dev/null
 }
@@ -1369,11 +1468,15 @@ glibc_do_src_install() {
 
 	# Install misc network config files
 	insinto /etc
-	doins nscd/nscd.conf posix/gai.conf nss/nsswitch.conf
-	doins "${WORKDIR}"/extra/etc/*.conf
+	doins posix/gai.conf nss/nsswitch.conf
+
+	# Gentoo-specific
+	newins "${FILESDIR}"/host.conf-1 host.conf
 
 	if use nscd ; then
-		doinitd "$(prefixify_ro "${WORKDIR}"/extra/etc/nscd)"
+		doins nscd/nscd.conf
+
+		newinitd "$(prefixify_ro "${FILESDIR}"/nscd-1)" nscd
 
 		local nscd_args=(
 			-e "s:@PIDFILE@:$(strings "${ED}"/usr/sbin/nscd | grep nscd.pid):"
@@ -1383,9 +1486,6 @@ glibc_do_src_install() {
 
 		systemd_dounit nscd/nscd.service
 		systemd_newtmpfilesd nscd/nscd.tmpfiles nscd.conf
-	else
-		# Do this since extra/etc/*.conf above might have nscd.conf.
-		rm -f "${ED}"/etc/nscd.conf
 	fi
 
 	echo 'LDPATH="include ld.so.conf.d/*.conf"' > "${T}"/00glibc
