@@ -1,4 +1,4 @@
-BDEPEND=python_targets_pypy3? ( >=dev-python/pypy3-7.3.11-r1:0= ) >=dev-python/setuptools-65.7.0[python_targets_pypy3(-)?]
+BDEPEND=python_targets_pypy3? ( dev-python/pypy3:= ) >=dev-python/setuptools-67.8.0-r1[python_targets_pypy3(-)?]
 DEFINED_PHASES=compile configure install prepare test unpack
 DEPEND=dev-python/setuptools[python_targets_pypy3(-)?]
 DESCRIPTION=Library that automatically infers dependencies for Python files
@@ -8,10 +8,10 @@ INHERIT=rindeal git-hosting distutils-r1 arrays
 IUSE=python_targets_pypy3
 KEYWORDS=~amd64 ~arm ~arm64
 LICENSE=Apache-2.0
-RDEPEND=python_targets_pypy3? ( >=dev-python/pypy3-7.3.11-r1:0= ) =dev-python/networkx-2*[python_targets_pypy3(-)?] =dev-python/six-1*[python_targets_pypy3(-)?]
+RDEPEND=python_targets_pypy3? ( dev-python/pypy3:= ) =dev-python/networkx-2*[python_targets_pypy3(-)?] =dev-python/six-1*[python_targets_pypy3(-)?]
 REQUIRED_USE=|| ( python_targets_pypy3 )
 RESTRICT=mirror primaryuri
 SLOT=0
 SRC_URI=https://github.com/google/importlab/archive/b982e3d44fbfbc3505fc00010fcff7613ec3b0b8.tar.gz -> github--google--importlab--b982e3d44fbfbc3505fc00010fcff7613ec3b0b8.tar.gz
-_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-hosting	84f64c6eacd2317de2a33945695bb4ac	out-of-source-utils	1a9007554652a6e627edbccb3c25a439	multibuild	bddcb51b74f4a76724ff7cf8e7388869	multilib	104e1332efb829e2f7cbf89307a474f1	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	76050953ad5b70d7e09a6ca55558db92	eapi8-dosym	741bfa77afb2a9321261501aca58c208	python-utils-r1	4544ab96b58e177dc52d75e42f5ee307	python-r1	3c6cd0f418ba702c186a9865b85e704d	distutils-r1	87ebb7e1e8d4ac49be0a91406b443060	arrays	67c9a6badc2548df5269b316770bacc6
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	git-hosting	84f64c6eacd2317de2a33945695bb4ac	toolchain-funcs	862d337d98edb576796827be2c6b11ca	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	be27a904c614cb93ae037762dc69bcc2	out-of-source-utils	1a9007554652a6e627edbccb3c25a439	multibuild	30dbf3c5a31db09a19f31ad0a68f2405	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	f3010c780f65d1bb5aea15a9af1adc9c	eapi8-dosym	5ac4857ad078256d939c44f7c64197a9	python-utils-r1	59e60e9c5cbd3f214d7f1002e798b387	python-r1	8a28fa6d3e3bc96ff8a7eff2badbe71f	distutils-r1	a93df67775ff86e107e56c6a6e68cf4e	arrays	67c9a6badc2548df5269b316770bacc6
 _md5_=74c21313fce9c3652d53b0107032ee4f

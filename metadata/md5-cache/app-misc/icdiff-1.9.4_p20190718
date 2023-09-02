@@ -1,5 +1,5 @@
 DEFINED_PHASES=install setup unpack
-DEPEND=python_single_target_pypy3? ( >=dev-python/pypy3-7.3.11-r1:0= )
+DEPEND=python_single_target_pypy3? ( dev-python/pypy3:= )
 DESCRIPTION=Colourized diff that supports side-by-side diffing
 EAPI=7
 HOMEPAGE=https://github.com/jeffkaufman/icdiff
@@ -7,10 +7,10 @@ INHERIT=rindeal python-single-r1 git-hosting arrays
 IUSE=+python_single_target_pypy3
 KEYWORDS=~amd64 ~arm ~arm64
 LICENSE=PSF-2
-RDEPEND=python_single_target_pypy3? ( >=dev-python/pypy3-7.3.11-r1:0= )
+RDEPEND=python_single_target_pypy3? ( dev-python/pypy3:= )
 REQUIRED_USE=^^ ( python_single_target_pypy3 )
 RESTRICT=mirror primaryuri
 SLOT=0
 SRC_URI=https://github.com/jeffkaufman/icdiff/archive/581e60a.tar.gz -> github--jeffkaufman--icdiff--581e60a.tar.gz
-_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	eapi8-dosym	741bfa77afb2a9321261501aca58c208	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	104e1332efb829e2f7cbf89307a474f1	python-utils-r1	4544ab96b58e177dc52d75e42f5ee307	python-single-r1	75118e916668a74c660a13b0ecb22562	git-hosting	84f64c6eacd2317de2a33945695bb4ac	arrays	67c9a6badc2548df5269b316770bacc6
+_eclasses_=portage-functions-patched	3a026583a923364e9ea2f9d2ad323c40	rindeal	3d1ea5c0e7a53613d1ba1ca572b222bd	eapi8-dosym	5ac4857ad078256d939c44f7c64197a9	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	862d337d98edb576796827be2c6b11ca	multilib	c19072c3cd7ac5cb21de013f7e9832e0	python-utils-r1	59e60e9c5cbd3f214d7f1002e798b387	python-single-r1	75118e916668a74c660a13b0ecb22562	git-hosting	84f64c6eacd2317de2a33945695bb4ac	arrays	67c9a6badc2548df5269b316770bacc6
 _md5_=ea636195c91175b24b090dba10769a68
