@@ -1,7 +1,0 @@
-*idea-community-2020.1.1.201.7223.91
-::prototype99	fix url, remove irrelevant logic
-*idea-community-2020.1.0.201.6668.121-r2
-::prototype99	update to eapi 6
-*idea-community-2020.1.0.201.6668.121
-::gentoo		base ebuild
-::tmacedo		more specific lldb dependency
