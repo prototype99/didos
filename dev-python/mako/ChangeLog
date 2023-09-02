@@ -1,6 +1,0 @@
-*mako-1.1.3-r1
-::prototype99	update to eapi 6
-*mako-1.1.3
-::gentoo		base ebuild
-::pg_overlay	add pypy support
-::prototype99	improve python use flags
