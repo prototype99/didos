@@ -1,8 +1,0 @@
-*mercurial-5.5-r2
-::prototype99	update to eapi 6
-*mercurial-5.5-r1
-::prototype99	add python3_10 compatibility
-*mercurial-5.5
-::gentoo		base ebuild
-::pg_overlay	add python3_9 compatibility
-::prototype99	add version check for python2_7, missing python use flag
