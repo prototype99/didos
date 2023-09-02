@@ -17,6 +17,7 @@ EXPORT_FUNCTIONS src_unpack src_install pkg_postinst pkg_postrm pkg_pretend
 if [[ ! ${_INTEL_SDP_R1_ECLASS_} ]]; then
 
 case "${EAPI}" in
+	6) ;;
 	7) ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
