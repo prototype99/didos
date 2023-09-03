@@ -1,5 +1,0 @@
-*gmp-6.2.1-r1
-::prototype99	update to eapi 6
-*gmp-6.2.1
-::gentoo		base ebuild
-::muslx32		musl&muslx32&pgo support, let user choose if they want c++
